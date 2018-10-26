@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <% include ../partials/head %>
+    
+    <link rel="shortcut icon" href="../img/favicon.png" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/proveedores.css" rel="stylesheet">
+    <link href="/css/plugins/dataTables/datatables.min.css" rel="stylesheet" />
+</head>
+<body class="mini-navbar">
+
+    <div id="wrapper">
+        <% include ../partials/nav-izq %>
+        <div id="page-wrapper" class="gray-bg">
+            <% include ../partials/nav-top %>
+            
+            <!--inicia tabla-->
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <!-- Etiquetas -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Programados</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+
+                                <div class="table-responsive">
+                                    <table id="GridNoMigrados" class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>IdEnvio</th>
+                                                <th>Cliente</th>
+                                                <th>FechaCarga</th>
+                                                <th>FechaInicio</th>
+                                                <th>FechaFin</th>
+                                                <th>Registros</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="datos-tabla">
+                                            <!--Pinta alertas en tabla proveedores--> 
+                                            <% MonitorNoMigrados.recordset.forEach(function(record){ %>
+                                            <% if (record.fechainicio.toUTCString() < Date.now()) { %>
+                                            <tr style="background-color: LightGreen; font-weight: bold; color: black;">
+                                            <% } else { %>
+                                            <tr>
+                                            <% } %>
+                                                <td><%= record.idenviopr %></td>
+                                                <td><%= record.cliente %></td>
+                                                <td><%= record.FechaCarga.toUTCString().slice(0, -4) %></td>
+                                                <td><%= record.fechainicio.toUTCString().slice(0, -4) %></td>
+                                                <td><%= record.fechafin.toUTCString().slice(0, -4) %></td>
+                                                <td><%= record.Regs.toLocaleString('en') %></td>
+                                            </tr>
+                                            <% }) %>
+
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- termina tabla-->
+            
+            <% include ../partials/footer %>
+        </div>
+    </div>
+    <% include ../partials/scripts %>
+    
+</body>
+</html>

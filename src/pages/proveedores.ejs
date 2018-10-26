@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <% include ../partials/head %>
+    <meta http-equiv="refresh" content="10">
+    <link rel="shortcut icon" href="../img/favicon.png" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/proveedores.css" rel="stylesheet">
+    <link href="/css/plugins/dataTables/datatables.min.css" rel="stylesheet" />
+</head>
+<body class="mini-navbar">
+
+    <div id="wrapper">
+        <% include ../partials/nav-izq %>
+        <div id="page-wrapper" class="gray-bg">
+            <% include ../partials/nav-top %>
+            <div class="row container" >
+                <div id="exitosos-wrapper" class="col-lg-2" style="display: inline-block; " >
+                    <div class="widget  navy-bg" style="" >
+                        <div class="row vertical-align text-left" >
+                            <div class="col-xs-3" >
+                                <i class="fa fa-thumbs-up fa-3x" ></i>
+                            </div>
+                            <div  class="col-xs-9 text-right" >
+                                <span id="Exitosos" class="font-bold"><%= Exitosos.toLocaleString('en') %></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="noexitosos-wrapper" class="col-lg-2" style="display: inline-block; ">
+                    <div class="widget  navy-bg" style="background-color:#FF6666;">
+                        <div class="row vertical-align">
+                            <div class="col-xs-3" >
+                                <i class="fa fa-thumbs-down fa-3x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <span id="NoExitosos" class="font-bold"><%= NoExitosos.toLocaleString('en') %></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="campanas-wrapper" class="col-lg-2" style="display: inline-block; ">
+                    <div class="widget  navy-bg" style="background-color:lightblue;  ">
+                        <div class="row vertical-align">
+                            <div class="col-xs-3" >
+                                <i class="fa fa-tasks fa-3x "></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <span id="Campanas" class="font-bold"><%= Campanas.toLocaleString('en') %></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--inicia tabla-->
+            <div class="wrapper wrapper-content animated fadeInRight" style="padding:0;">
+                <!-- Etiquetas -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Proveedores</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+
+                                <div class="table-responsive">
+                                    <table id="GridProveedores" class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Proveedor</th>
+                                                <th>Etiqueta</th>
+                                                <th>Exitosos</th>
+                                                <th>No Exitosos</th>
+                                                <th>En Cola</th>
+                                                <th>Tiempo en Cola</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="datos-tabla">
+                                            <!--Pinta alertas en tabla proveedores--> 
+                                            <% monitorProveedores.recordset.forEach(function(record){ %>
+                                            <% if (record["En cola"]>0) { %>
+                                            <tr style="background-color: LightGreen; font-weight: bold; color: black;">
+                                            <% } else { %>
+                                            <tr>
+                                            <% } %>
+                                            <% if (Date.parse('01/01/2011 '+record["Tiempo en cola"])>Date.parse('01/01/2011 00:05:00')) { %>
+                                            <tr style="background-color: Red; font-weight: bold; color: black;">
+                                            <% } else if (Date.parse('01/01/2011 '+record["Tiempo en cola"])>Date.parse('01/01/2011 00:01:00')) { %>
+                                            <tr style="background-color: Orange; font-weight: bold; color: black;">
+                                            <% } %>
+                                                <td><%= record.Proveedor %></td>
+                                                <td><%= record.Etiqueta %></td>
+                                                <td><%= record.Exitosos.toLocaleString('en') %></td>
+                                                <td><%= record["No Exitosos"].toLocaleString('en') %></td>
+                                                <td><%= record["En cola"] %></td>
+                                                <td><%= record["Tiempo en cola"] %></td>
+                                            </tr>
+                                            <% }) %>
+
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- termina tabla-->
+            <div class="container">
+	            
+            </div>
+            <% include ../partials/footer %>
+        </div>
+    </div>
+    <% include ../partials/scripts %>
+    <script>
+        
+    </script>
+</body>
+</html>

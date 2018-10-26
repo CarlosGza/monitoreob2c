@@ -1,0 +1,62 @@
+#Exitosos,#NoExitosos,#Campanas{
+    font-size: 2em;
+}
+
+@media (min-width: 711px) {
+    #exitosos-wrapper {
+        min-width: 230px;
+    }
+    #noexitosos-wrapper {
+        min-width: 160px;
+    }
+    #campanas-wrapper {
+        min-width: 160px;
+    }
+    
+}
+@media(max-width:710px){
+    
+    #exitosos-wrapper {
+        width: 30%;
+        font-size: 1.5vw;
+        padding:.5vh .1vw;
+    }
+    #noexitosos-wrapper {
+        width: 30%;
+        font-size: 1.5vw;
+        padding:.5vh .1vw;
+    }
+    #campanas-wrapper {
+        width: 30%;
+        font-size: 1.5vw;
+        padding:.5vh .1vw;
+    }
+    .container{
+        text-align:center;
+    }
+    
+}
+@media (max-width: 560px){
+    #exitosos-wrapper{
+        width:100%;
+        font-size: 2vw;
+        margin-top:.2vw;
+    }
+    #noexitosos-wrapper,#campanas-wrapper{
+        width:100%;
+        font-size: 2vw;
+    }
+    #Exitosos,#NoExitosos,#Campanas{
+        font-size: 5vw;
+        padding:0px;
+    }
+    .widget{
+        padding:1vw;
+        margin-bottom: .2vw;
+        margin-top: .2vw;
+    }
+    .col-xs-3{
+    margin-top: .4vh;
+    }
+    
+}

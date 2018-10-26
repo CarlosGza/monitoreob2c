@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <% include ../partials/head %>
+    <meta http-equiv="refresh" content="300">
+    <link rel="shortcut icon" href="../img/favicon.png" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/proveedores.css" rel="stylesheet">
+    <link href="/css/plugins/dataTables/datatables.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <style>
+        @media(max-width: 1230px){
+            #principal,#Carrier-wrapper{
+                text-align:center;
+                margin:auto;
+            }
+
+            #Proveedor-wrapper{
+                width:100%;
+            }
+            
+        }
+    </style>
+</head>
+<body class="mini-navbar">
+
+    <div id="wrapper">
+        <% include ../partials/nav-izq %>
+        <div id="page-wrapper" class="gray-bg">
+            <% include ../partials/nav-top %>
+            
+            <div id="principal" class="row container-fluid border-bottom" style="text-align:center;overflow:auto;">
+                <div id="Carrier-wrapper" style=" display:inline-block;text-align:center; margin:auto;" class="col-lg-4 ">
+                    <canvas id="chartCarrier"  class="animated bounceIn"></canvas>
+                </div>
+
+                <div id="Proveedor-wrapper" style=" display:inline-block; min-width: 650px; text-align:center; margin:auto; " class="col-lg-8 ">
+                    <canvas id="chartProveedores"  class="animated fadeInRight"></canvas>
+                </div>
+            </div>
+
+            <div class="row container-fluid border-bottom " style="overflow:auto; padding-bottom:5%;">
+                <div style="width:100%; min-width:900px;">
+                        <canvas id="chartClientes" class="animated fadeInUp" ></canvas>
+                </div>
+            </div>
+            
+
+            <% include ../partials/footer %>
+        </div>
+    </div>
+    <% include ../partials/scripts %>
+    
+    <script>
+        let graficaProveedor = <%- JSON.stringify(graficaProveedor) %>
+        let graficaCarrier = <%- JSON.stringify(graficaCarrier) %>
+        let graficaCliente = <%- JSON.stringify(graficaCliente) %>
+    </script>
+    <script src="../js/graficos.js"></script>
+    
+</body>
+</html>
