@@ -29,15 +29,16 @@ app.use(bodyParser.json());
 
 // Route to post data
 app.post('/',function (req, res){
-    Exitosos = req.body.Exitosos
-    NoExitosos = req.body.NoExitosos
-    Campanas = req.body.Campanas
-    monitorProveedores = req.body.monitorProveedores
-    MonitorNoMigrados = req.body.MonitorNoMigrados
-    GraficaProveedor = req.body.GraficaProveedor
-    GraficaCarrier = req.body.GraficaCarrier
-    GraficaCliente = req.body.GraficaCliente
-    MensajesPrueba = req.body.MensajesPrueba
+    let Datos = JSON.parse(req.body)
+    Exitosos = Datos.Exitosos
+    NoExitosos = Datos.NoExitosos
+    Campanas = Datos.Campanas
+    monitorProveedores = Datos.monitorProveedores
+    MonitorNoMigrados = Datos.MonitorNoMigrados
+    GraficaProveedor = Datos.GraficaProveedor
+    GraficaCarrier = Datos.GraficaCarrier
+    GraficaCliente = Datos.GraficaCliente
+    MensajesPrueba = Datos.MensajesPrueba
     res.send('200')
 });
 
