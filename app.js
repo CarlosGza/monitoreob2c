@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Route to post data
-app.post('/',function (req, res){
+app.post('/api',function (req, res){
     let Datos = JSON.parse(req.body)
     Exitosos = Datos.Exitosos
     NoExitosos = Datos.NoExitosos
@@ -39,7 +39,7 @@ app.post('/',function (req, res){
     GraficaCarrier = Datos.GraficaCarrier
     GraficaCliente = Datos.GraficaCliente
     MensajesPrueba = Datos.MensajesPrueba
-    res.send(req.body)
+    res.send('200')
 });
 
 
