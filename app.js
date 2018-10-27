@@ -39,7 +39,7 @@ app.post('/',function (req, res){
     GraficaCarrier = Datos.GraficaCarrier
     GraficaCliente = Datos.GraficaCliente
     MensajesPrueba = Datos.MensajesPrueba
-    res.send('200')
+    res.send(req.body)
 });
 
 
