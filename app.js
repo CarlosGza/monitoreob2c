@@ -95,8 +95,10 @@ app.get(['/','/Proveedores'], function (req, res) {
 // Route /Envios
 app.get('/Programados', function (req, res) {
     
-    res.sendFile('programados.html');    
-    
+    res.render('programados',{
+        MonitorNoMigrados: MonitorNoMigrados    
+    });    
+    console.log('test')
 });
 
 // Route /Envios
