@@ -8,15 +8,8 @@ const bodyParser = require('body-parser')
 
 
 // json data
-let Exitosos = {}
-let NoExitosos = {}
-let Campanas = {}
-let monitorProveedores = {}
-let MonitorNoMigrados = {}
-let GraficaProveedor = []
-let GraficaCarrier = []
-let GraficaCliente = []
-let MensajesPrueba = {}
+let Datos = {}
+
 
 // settings
 app.use('*/css',express.static('src/css'));
@@ -29,16 +22,7 @@ app.use(bodyParser.json());
 
 // Route to post data
 app.post('/api',function (req, res){
-    let Datos = JSON.parse(req.body)
-    Exitosos = Datos.Exitosos
-    NoExitosos = Datos.NoExitosos
-    Campanas = Datos.Campanas
-    monitorProveedores = Datos.monitorProveedores
-    MonitorNoMigrados = Datos.MonitorNoMigrados
-    GraficaProveedor = Datos.GraficaProveedor
-    GraficaCarrier = Datos.GraficaCarrier
-    GraficaCliente = Datos.GraficaCliente
-    MensajesPrueba = Datos.MensajesPrueba
+    Datos = JSON.parse(req.body)
     res.send('200')
 });
 
@@ -47,10 +31,10 @@ app.post('/api',function (req, res){
 app.get(['/','/Proveedores'], function (req, res) {
     if (Object.keys(monitorProveedores).length > 0 && Object.keys(Exitosos).length > 0 && Object.keys(NoExitosos).length > 0 && Object.keys(Campanas).length > 0){
         res.render('proveedores',{
-            monitorProveedores: monitorProveedores,
-            Exitosos: Exitosos.recordset[0].Exitosos,
-            NoExitosos: NoExitosos.recordset[0].NoExitosos,
-            Campanas: Campanas.recordset[0].Campanas
+            monitorProveedores: Datos.monitorProveedores,
+            Exitosos: Datos.Exitosos.recordset[0].Exitosos,
+            NoExitosos: Datos.NoExitosos.recordset[0].NoExitosos,
+            Campanas: Datos.Campanas.recordset[0].Campanas
         });    
     } else {
         res.send('Sin datos cargados')
@@ -61,7 +45,7 @@ app.get(['/','/Proveedores'], function (req, res) {
 app.get('/Programados', function (req, res) {
     if (Object.keys(MonitorNoMigrados).length > 0){
         res.render('programados',{
-            MonitorNoMigrados: MonitorNoMigrados    
+            MonitorNoMigrados: Datos.MonitorNoMigrados    
         });
     } else {
         res.send('Sin datos cargados')
@@ -72,9 +56,9 @@ app.get('/Programados', function (req, res) {
 app.get('/Graficas', function (req, res) {
     if (GraficaProveedor.length > 0 && GraficaCarrier.length > 0 && GraficaCliente.length > 0){
         res.render('graficas',{
-            graficaProveedor: GraficaProveedor.recordset,
-            graficaCarrier: GraficaCarrier.recordset,
-            graficaCliente: GraficaCliente.recordset
+            graficaProveedor: Datos.GraficaProveedor.recordset,
+            graficaCarrier: Datos.GraficaCarrier.recordset,
+            graficaCliente: Datos.GraficaCliente.recordset
         });    
     } else {
         res.send('Sin datos cargados')
@@ -86,7 +70,7 @@ app.get('/Graficas', function (req, res) {
 app.get('/MensajesPrueba', function (req, res) {
     if (Object.keys(MensajesPrueba).length > 0){
         res.render('mensajesprueba',{
-            MensajesPrueba: MensajesPrueba
+            MensajesPrueba: Datos.MensajesPrueba
         });    
     } else {
         res.send('Sin datos cargados')
