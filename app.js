@@ -78,6 +78,7 @@ app.post('/',function (req, res){
     GraficaCarrier = req.body.GraficaCarrier
     GraficaCliente = req.body.GraficaCliente
     MensajesPrueba = req.body.MensajesPrueba
+    res.end()
 });
 // Route /Proveedores
 app.get(['/','/Proveedores'], function (req, res) {
