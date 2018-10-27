@@ -82,12 +82,11 @@ app.post('/',function (req, res){
 });
 
 // Route /Envios
-app.get(['/Programados','/Envios'], function (req, res) {
+app.get('/Programados', function (req, res) {
     
     res.render('programados',{
         MonitorNoMigrados: MonitorNoMigrados    
-    });    
-    console.log('test')
+    });
 });
 
 // Route /Proveedores
