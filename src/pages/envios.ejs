@@ -52,7 +52,11 @@
                                         <tbody id="datos-tabla">
                                             <!--Pinta alertas en tabla proveedores--> 
                                             <% MonitorNoMigrados.recordset.forEach(function(record){ %>
+                                            <% if (record.fechainicio.toUTCString() < Date.now()) { %>
+                                            <tr style="background-color: LightGreen; font-weight: bold; color: black;">
+                                            <% } else { %>
                                             <tr>
+                                            <% } %>
                                                 <td><%= record.idenviopr %></td>
                                                 <td><%= record.cliente %></td>
                                                 <td><%= record.FechaCarga.toUTCString().slice(0, -4) %></td>
