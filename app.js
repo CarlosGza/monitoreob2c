@@ -80,6 +80,16 @@ app.post('/',function (req, res){
     MensajesPrueba = req.body.MensajesPrueba
     res.end("200")
 });
+
+// Route /Envios
+app.get('/Programados', function (req, res) {
+    
+    res.render('programados',{
+        MonitorNoMigrados: MonitorNoMigrados    
+    });    
+    console.log('test')
+});
+
 // Route /Proveedores
 app.get(['/','/Proveedores'], function (req, res) {
     
@@ -92,16 +102,9 @@ app.get(['/','/Proveedores'], function (req, res) {
     
 });
 
-// Route /Envios
-app.get('/Programados', function (req, res) {
-    
-    res.render('programados',{
-        MonitorNoMigrados: MonitorNoMigrados    
-    });    
-    console.log('test')
-});
 
-// Route /Envios
+
+// Route /Graficas
 app.get('/Graficas', function (req, res) {
     
     res.render('graficas',{
