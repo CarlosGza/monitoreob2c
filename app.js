@@ -95,9 +95,7 @@ app.get(['/','/Proveedores'], function (req, res) {
 // Route /Envios
 app.get('/Envios', function (req, res) {
     
-    res.render('envios',{
-        MonitorNoMigrados: MonitorNoMigrados
-    });    
+    res.render('envios');    
     
 });
 
