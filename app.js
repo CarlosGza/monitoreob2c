@@ -1,16 +1,11 @@
 const express = require('express')
-const sql = require('mssql')
+//const sql = require('mssql')
 const app = express()
 const path = require('path')
 const port = process.env.PORT || 3000
+const bodyParser = require('body-parser')
 
-// config server
-const config = {
-    user: 'sysdbo',
-    password: 'QxaAvTeG',
-    server: 'mtelsqlsms2', 
-    database: 'SMSReportes' 
-};
+
 
 // json data
 let Exitosos = {}
@@ -29,8 +24,10 @@ app.use('*/js',express.static('src/js'));
 app.use('*/images',express.static('src/images'));
 app.set('views', path.join(__dirname, 'src/pages'))
 app.set('view engine','ejs')
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-
+/*
 // update Grids every 10 seconds
 setInterval( () => {
     (async function updateData() {
@@ -70,8 +67,18 @@ setInterval( () => {
         sql.close()
     })()
 },10000)
-
-
+*/
+app.post('/',function (req, res){
+    Exitosos = req.body.Exitosos
+    NoExitosos = req.body.NoExitosos
+    Campanas = req.body.Campanas
+    monitorProveedores = req.body.monitorProveedores
+    MonitorNoMigrados = req.body.MonitorNoMigrados
+    GraficaProveedor = req.body.GraficaProveedor
+    GraficaCarrier = req.body.GraficaCarrier
+    GraficaCliente = req.body.GraficaCliente
+    MensajesPrueba = req.body.MensajesPrueba
+});
 // Route /Proveedores
 app.get(['/','/Proveedores'], function (req, res) {
     
