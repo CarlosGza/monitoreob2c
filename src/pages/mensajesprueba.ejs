@@ -54,7 +54,7 @@
                                         </thead>
                                         <tbody id="datos-tabla">
                                             <!--Pinta alertas en tabla proveedores--> 
-                                            <% MensajesPrueba.recordset.forEach(function(record){ %>
+                                            <% MensajesPrueba.forEach(function(record){ %>
                                             <% if (record.Diff_Minutos == -1) { %>
                                             <tr style="background-color: Red; font-weight: bold; color: black;">
                                             <% } else { %>
@@ -65,8 +65,8 @@
                                                 <td><%= record.HoraMonitor %></td>
                                                 <td><%= record.Etiqueta %></td>
                                                 <td><%= record.TelefonoEmisor %></td>
-                                                <td><%= record.FechaEnvio.toUTCString().slice(0, -4) %></td>
-                                                <td><%= record.FechaRecibido.toUTCString().slice(0, -4) %></td>
+                                                <td><%= record.FechaEnvio %></td>
+                                                <td><%= record.FechaRecibido %></td>
                                                 <td><%= record.Diff_Segundos %></td>
                                                 <td><%= record.Diff_Minutos %></td>
                                             </tr>

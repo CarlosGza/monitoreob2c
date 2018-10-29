@@ -4,7 +4,7 @@ const app = express()
 const path = require('path')
 const port = process.env.PORT || 3000
 const bodyParser = require('body-parser')
-
+const jsonParser = bodyParser.json()
 
 
 // json data
@@ -17,50 +17,65 @@ app.use('*/js',express.static('src/js'));
 app.use('*/images',express.static('src/images'));
 app.set('views', path.join(__dirname, 'src/pages'))
 app.set('view engine','ejs')
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+
+
 
 // Route to post data
-app.post('/api',function (req, res){
-    Datos = JSON.parse(req.body)
-    res.send('200')
+app.post('/', function (req, res){
+    Datos = req.body
+    
+    res.end('200')
 });
 
 
 // Route /Proveedores
 app.get(['/','/Proveedores'], function (req, res) {
-    if (Object.keys(monitorProveedores).length > 0 && Object.keys(Exitosos).length > 0 && Object.keys(NoExitosos).length > 0 && Object.keys(Campanas).length > 0){
+    
+    try {
+        
         res.render('proveedores',{
-            monitorProveedores: Datos.monitorProveedores,
-            Exitosos: Datos.Exitosos.recordset[0].Exitosos,
-            NoExitosos: Datos.NoExitosos.recordset[0].NoExitosos,
-            Campanas: Datos.Campanas.recordset[0].Campanas
-        });    
-    } else {
+            MonitorProveedores: Datos.MonitorProveedores,
+            Exitosos: Datos.Exitosos,
+            NoExitosos: Datos.NoExitosos,
+            Campanas: Datos.Campanas
+        });
+        
+    }
+    catch (err) {
         res.send('Sin datos cargados')
+
     }
 });
 
 // Route /Programados
 app.get('/Programados', function (req, res) {
-    if (Object.keys(MonitorNoMigrados).length > 0){
+    try {
+        
         res.render('programados',{
-            MonitorNoMigrados: Datos.MonitorNoMigrados    
+            MonitorNoMigrados: Datos.MonitorNoMigrados   
         });
-    } else {
+    
+    }
+    catch (err) {
         res.send('Sin datos cargados')
     }
 });
 
 // Route /Graficas
 app.get('/Graficas', function (req, res) {
-    if (GraficaProveedor.length > 0 && GraficaCarrier.length > 0 && GraficaCliente.length > 0){
-        res.render('graficas',{
-            graficaProveedor: Datos.GraficaProveedor.recordset,
-            graficaCarrier: Datos.GraficaCarrier.recordset,
-            graficaCliente: Datos.GraficaCliente.recordset
+    try {
+            res.render('graficas',{
+            graficaProveedor: Datos.GraficaProveedor,
+            graficaCarrier: Datos.GraficaCarrier,
+            graficaCliente: Datos.GraficaCliente
         });    
-    } else {
+    
+    }
+    catch (err) {
         res.send('Sin datos cargados')
     }
     
@@ -68,11 +83,14 @@ app.get('/Graficas', function (req, res) {
 
 // Route /MensajesPrueba
 app.get('/MensajesPrueba', function (req, res) {
-    if (Object.keys(MensajesPrueba).length > 0){
+    try {
+        
         res.render('mensajesprueba',{
             MensajesPrueba: Datos.MensajesPrueba
         });    
-    } else {
+    
+    }
+    catch (err) {
         res.send('Sin datos cargados')
     }
 });

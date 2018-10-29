@@ -5,7 +5,7 @@
     
     <link rel="shortcut icon" href="/img/favicon.png" />
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/proveedores.css" rel="stylesheet">
@@ -51,17 +51,17 @@
                                         </thead>
                                         <tbody id="datos-tabla">
                                             <!--Pinta alertas en tabla proveedores--> 
-                                            <% MonitorNoMigrados.recordset.forEach(function(record){ %>
-                                            <% if (record.fechainicio.toUTCString() < Date.now()) { %>
+                                            <% MonitorNoMigrados.forEach(function(record){ %>
+                                            <% if (record.fechainicio < Date.now()) { %>
                                             <tr style="background-color: LightGreen; font-weight: bold; color: black;">
                                             <% } else { %>
                                             <tr>
                                             <% } %>
                                                 <td><%= record.idenviopr %></td>
                                                 <td><%= record.cliente %></td>
-                                                <td><%= record.FechaCarga.toUTCString().slice(0, -4) %></td>
-                                                <td><%= record.fechainicio.toUTCString().slice(0, -4) %></td>
-                                                <td><%= record.fechafin.toUTCString().slice(0, -4) %></td>
+                                                <td><%= record.FechaCarga %></td>
+                                                <td><%= record.fechainicio %></td>
+                                                <td><%= record.fechafin %></td>
                                                 <td><%= record.Regs.toLocaleString('en') %></td>
                                             </tr>
                                             <% }) %>

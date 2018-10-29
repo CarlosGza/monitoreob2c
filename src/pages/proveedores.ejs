@@ -89,7 +89,7 @@
                                         </thead>
                                         <tbody id="datos-tabla">
                                             <!--Pinta alertas en tabla proveedores--> 
-                                            <% monitorProveedores.recordset.forEach(function(record){ %>
+                                            <% MonitorProveedores.forEach(function(record){ %>
                                             <% if (record["En cola"]>0) { %>
                                             <tr style="background-color: LightGreen; font-weight: bold; color: black;">
                                             <% } else { %>
