@@ -59,9 +59,9 @@
                                             <% } %>
                                                 <td><%= record.idenviopr %></td>
                                                 <td><%= record.cliente %></td>
-                                                <td><%= record.FechaCarga %></td>
-                                                <td><%= record.fechainicio %></td>
-                                                <td><%= record.fechafin %></td>
+                                                <td><%= record.FechaCarga.substring(0,19).replace('T',' ') %></td>
+                                                <td><%= record.fechainicio.substring(0,19).replace('T',' ') %></td>
+                                                <td><%= record.fechafin.substring(0,19).replace('T',' ') %></td>
                                                 <td><%= record.Regs.toLocaleString('en') %></td>
                                             </tr>
                                             <% }) %>

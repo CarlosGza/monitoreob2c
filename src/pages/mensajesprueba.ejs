@@ -65,8 +65,8 @@
                                                 <td><%= record.HoraMonitor %></td>
                                                 <td><%= record.Etiqueta %></td>
                                                 <td><%= record.TelefonoEmisor %></td>
-                                                <td><%= record.FechaEnvio %></td>
-                                                <td><%= record.FechaRecibido %></td>
+                                                <td><%= record.FechaEnvio.substring(0,19).replace('T',' ') %></td>
+                                                <td><%= record.FechaRecibido.substring(0,19).replace('T',' ') %></td>
                                                 <td><%= record.Diff_Segundos %></td>
                                                 <td><%= record.Diff_Minutos %></td>
                                             </tr>
