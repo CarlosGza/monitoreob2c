@@ -234,14 +234,14 @@ var canvasCarrier = document.getElementById("chartCarrier");
 var labelClientes = [];
 var dataAuronix = [];
 var dataQuiubas = [];
-var dataC3ntro = [];
+var dataDedicado = [];
 var dataConnect = [];
 
 for (i = 0; i < graficaCliente.length; i++) {
     labelClientes.push(graficaCliente[i]['Cliente'].substr(0, 30));
     dataAuronix.push(graficaCliente[i]['Auronix']);
     dataQuiubas.push(graficaCliente[i]['Quiubas']);
-    dataC3ntro.push(graficaCliente[i]['C3ntro']);
+    dataDedicado.push(graficaCliente[i]['Dedicado']);
     dataConnect.push(graficaCliente[i]['Connect']);
 };
 
@@ -256,9 +256,9 @@ var dataClientes = {
         backgroundColor: window.chartColors.red,
         data: dataQuiubas
     }, {
-        label: 'C3ntro',
+        label: 'Dedicado',
         backgroundColor: window.chartColors.green,
-        data: dataC3ntro
+        data: dataDedicado
     }, {
         label: 'Connect',
         backgroundColor: window.chartColors.purple,
