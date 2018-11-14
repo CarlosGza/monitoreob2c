@@ -25,12 +25,12 @@ var auronixotros = [];
 //var c3ntrotelcel = [];
 //var c3ntromovistar = [];
 //var c3ntrootros = [];
-var quiubasatt = [];
+//var quiubasatt = [];
 var quiubastelcel = [];
-var quiubasmovistar = [];
-var quiubasotros = [];
+//var quiubasmovistar = [];
+//var quiubasotros = [];
 var connectatt = [];
-var connecttelcel = [];
+//var connecttelcel = [];
 var connectmovistar = [];
 var connectotros = [];
 
@@ -45,12 +45,12 @@ for (i = 0; i < graficaProveedor.length; i++) {
     //c3ntrotelcel.push(graficaProveedor[i]['C3ntro - Telcel']);
     //c3ntromovistar.push(graficaProveedor[i]['C3ntro - Movistar']);
     //c3ntrootros.push(graficaProveedor[i]['C3ntro - Otros']);
-    quiubasatt.push(graficaProveedor[i]['Quiubas - AT&T']);
+    //quiubasatt.push(graficaProveedor[i]['Quiubas - AT&T']);
     quiubastelcel.push(graficaProveedor[i]['Quiubas - Telcel']);
-    quiubasmovistar.push(graficaProveedor[i]['Quiubas - Movistar']);
-    quiubasotros.push(graficaProveedor[i]['Quiubas - Otros']);
+    //quiubasmovistar.push(graficaProveedor[i]['Quiubas - Movistar']);
+    //quiubasotros.push(graficaProveedor[i]['Quiubas - Otros']);
     connectatt.push(graficaProveedor[i]['Connect - AT&T']);
-    connecttelcel.push(graficaProveedor[i]['Connect - Telcel']);
+    //connecttelcel.push(graficaProveedor[i]['Connect - Telcel']);
     connectmovistar.push(graficaProveedor[i]['Connect - Movistar']);
     connectotros.push(graficaProveedor[i]['Connect - Otros']);
 };
@@ -119,13 +119,13 @@ var configProveedores = {
                 data: c3ntrootros
             },*/
             //Quiubas
-            {
+            /*{
                 label: 'Quiubas - AT&T',
                 fill: false,
                 backgroundColor: chartColors.lightBlue,
                 borderColor: chartColors.lightBlue,
                 data: quiubasatt
-            },
+            },*/
             {
                 label: 'Quiubas - Telcel',
                 fill: false,
@@ -133,7 +133,7 @@ var configProveedores = {
                 borderColor: chartColors.brown,
                 data: quiubastelcel
             },
-            {
+            /*{
                 label: 'Quiubas - Movistar',
                 fill: false,
                 backgroundColor: chartColors.aqua,
@@ -146,7 +146,7 @@ var configProveedores = {
                 backgroundColor: chartColors.beige,
                 borderColor: chartColors.beige,
                 data: quiubasotros
-            },
+            },*/
             //Connect
             {
                 label: 'Connect - AT&T',
@@ -155,13 +155,13 @@ var configProveedores = {
                 borderColor: chartColors.lightBlue,
                 data: connectatt
             },
-            {
+            /*{
                 label: 'Connect - Telcel',
                 fill: false,
                 backgroundColor: chartColors.beige,
                 borderColor: chartColors.beige,
                 data: connecttelcel
-            },
+            },*/
             {
                 label: 'Connect - Movistar',
                 fill: false,
@@ -234,14 +234,14 @@ var canvasCarrier = document.getElementById("chartCarrier");
 var labelClientes = [];
 var dataAuronix = [];
 var dataQuiubas = [];
-var dataDedicado = [];
+var dataBancos = [];
 var dataConnect = [];
 
 for (i = 0; i < graficaCliente.length; i++) {
     labelClientes.push(graficaCliente[i]['Cliente'].substr(0, 30));
     dataAuronix.push(graficaCliente[i]['Auronix']);
     dataQuiubas.push(graficaCliente[i]['Quiubas']);
-    dataDedicado.push(graficaCliente[i]['Dedicado']);
+    dataBancos.push(graficaCliente[i]['Auronix Bancos']);
     dataConnect.push(graficaCliente[i]['Connect']);
 };
 
@@ -256,9 +256,9 @@ var dataClientes = {
         backgroundColor: window.chartColors.red,
         data: dataQuiubas
     }, {
-        label: 'Dedicado',
+        label: 'Auronix Bancos',
         backgroundColor: window.chartColors.green,
-        data: dataDedicado
+        data: dataBancos
     }, {
         label: 'Connect',
         backgroundColor: window.chartColors.purple,
