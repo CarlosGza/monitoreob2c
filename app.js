@@ -17,9 +17,10 @@ app.use('*/js',express.static('src/js'));
 app.use('*/images',express.static('src/images'));
 app.set('views', path.join(__dirname, 'src/pages'))
 app.set('view engine','ejs')
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use( bodyParser.json({limit: '50mb'}) );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
+    limit: '50mb',
+    extended: true
 })); 
 
 // Route to post data
