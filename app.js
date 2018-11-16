@@ -49,7 +49,7 @@ app.get(['/','/Proveedores'], function (req, res) {
 });
 // Route /Envios
 app.get('/Envios', function (req, res) {
-    /*try {
+    try {
         
         res.render('envios',{
             MonitorEnvios: Datos.MonitorEnvios
@@ -58,8 +58,7 @@ app.get('/Envios', function (req, res) {
     }
     catch (err) {
         res.send('Sin datos cargados')
-    }*/
-    res.end('test')
+    }
 });
 
 // Route /Programados
