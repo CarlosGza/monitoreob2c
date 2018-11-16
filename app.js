@@ -22,15 +22,12 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
-
-
 // Route to post data
 app.post('/', function (req, res){
     Datos = req.body
     
     res.end('200')
 });
-
 
 // Route /Proveedores
 app.get(['/','/Proveedores'], function (req, res) {
@@ -87,6 +84,20 @@ app.get('/MensajesPrueba', function (req, res) {
         
         res.render('mensajesprueba',{
             MensajesPrueba: Datos.MensajesPrueba
+        });    
+    
+    }
+    catch (err) {
+        res.send('Sin datos cargados')
+    }
+});
+
+// Route /Envios
+app.get('/Envios', function (req, res) {
+    try {
+        
+        res.render('envios',{
+            envios: Datos.envios
         });    
     
     }
