@@ -55,18 +55,14 @@
                                         <tbody id="datos-tabla">
                                             <!--Pinta alertas en tabla proveedores--> 
                                             <% MonitorEnvios.forEach(function(record){ %>
-                                            <% if (record.Estado="En Proceso") { %>
-                                            <tr style="background-color: LightGreen; font-weight: bold; color: black;">
-                                            <% } else if (record.Estado="Duplicados") { %>
-                                            <tr style="background-color: Orange; font-weight: bold; color: black;">
-                                            <%} else {%>
+                                            
                                             <tr>
-                                            <% } %>
+                                            
                                                 <td><%= record.IdEnvioPr %></td>
                                                 <td><%= record.Cliente %></td>
                                                 <td><%= record.Usuario %></td>
-                                                <td><%= record.FechaInicio.substring(0,19).replace('T',' ') %></td>
-                                                <td><%= record.FechaFin.substring(0,19).replace('T',' ') %></td>
+                                                <td><%= record.HoraInicio.substring(0,19).replace('T',' ') %></td>
+                                                <td><%= record.HoraFin.substring(0,19).replace('T',' ') %></td>
                                                 <td><%= record.Registros.toLocaleString('en') %></td>
                                                 <td><%= record.Exitosos.toLocaleString('en') %></td>
                                                 <td><%= record.NoExitosos.toLocaleString('en') %></td>
