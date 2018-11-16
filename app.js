@@ -47,6 +47,20 @@ app.get(['/','/Proveedores'], function (req, res) {
 
     }
 });
+// Route /Envios
+app.get('/Envios', function (req, res) {
+    /*try {
+        
+        res.render('envios',{
+            MonitorEnvios: Datos.MonitorEnvios
+        });    
+    
+    }
+    catch (err) {
+        res.send('Sin datos cargados')
+    }*/
+    res.end('test')
+});
 
 // Route /Programados
 app.get('/Programados', function (req, res) {
@@ -92,19 +106,7 @@ app.get('/MensajesPrueba', function (req, res) {
     }
 });
 
-// Route /Envios
-app.get('/Envios', function (req, res) {
-    try {
-        
-        res.render('envios',{
-            MonitorEnvios: Datos.MonitorEnvios
-        });    
-    
-    }
-    catch (err) {
-        res.send('Sin datos cargados')
-    }
-});
+
 
 // Server Listen
 var server = app.listen(port, function () {
