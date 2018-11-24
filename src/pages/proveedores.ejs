@@ -91,14 +91,14 @@
                                             <!--Pinta alertas en tabla proveedores--> 
                                             <% MonitorProveedores.forEach(function(record){ %>
                                             <% if (record["En cola"]>0) { %>
-                                            <tr style="background-color: LightGreen; font-weight: bold; color: black;">
+                                            <tr style="background-color: LightGreen; font-weight: bold; color: black; font-size: 1.3em;">
                                             <% } else { %>
                                             <tr>
                                             <% } %>
                                             <% if (Date.parse('01/01/2011 '+record["Tiempo en cola"])>Date.parse('01/01/2011 00:05:00')) { %>
-                                            <tr style="background-color: Red; font-weight: bold; color: black;">
+                                            <tr style="background-color: Red; font-weight: bold; color: black; font-size: 1.3em;">
                                             <% } else if (Date.parse('01/01/2011 '+record["Tiempo en cola"])>Date.parse('01/01/2011 00:01:00')) { %>
-                                            <tr style="background-color: Orange; font-weight: bold; color: black;">
+                                            <tr style="background-color: Orange; font-weight: bold; color: black; font-size: 1.3em;">
                                             <% } %>
                                                 <td><%= record.Proveedor %></td>
                                                 <td><%= record.Etiqueta %></td>
