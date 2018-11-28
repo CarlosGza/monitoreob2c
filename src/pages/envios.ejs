@@ -67,7 +67,7 @@
                                                 <td><%= record.Exitosos.toLocaleString('en') %></td>
                                                 <td><%= record.NoExitosos.toLocaleString('en') %></td>
                                                 <% if (record.Estado == 'Duplicados'){ %>
-                                                <td class="text-center"><%= (record.Exitosos - record.Registros) + ' ' + record.Estado %></td>
+                                                <td class="text-center"><%= ((record.Exitosos + record.NoExitosos) - record.Registros) + ' ' + record.Estado %></td>
                                                 <% } else { %>
                                                 <td class="text-center"><%= record.Estado %></td>
                                                 <% } %>
