@@ -268,7 +268,7 @@ var dataClientes = {
     }, {
         label: 'C3ntro',
         backgroundColor: window.chartColors.orange,
-        data: dataConnect
+        data: dataC3ntro
     }]
 };
 
