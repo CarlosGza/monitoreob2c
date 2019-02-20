@@ -22,7 +22,7 @@ var auronixtelcel = [];
 var auronixmovistar = [];
 var auronixotros = [];
 //var c3ntroatt = [];
-//var c3ntrotelcel = [];
+var c3ntrotelcel = [];
 //var c3ntromovistar = [];
 //var c3ntrootros = [];
 //var quiubasatt = [];
@@ -42,7 +42,7 @@ for (i = 0; i < graficaProveedor.length; i++) {
     auronixmovistar.push(graficaProveedor[i]['Auronix - Movistar']);
     auronixotros.push(graficaProveedor[i]['Auronix - Otros']);
     //c3ntroatt.push(graficaProveedor[i]['C3ntro - AT&T']);
-    //c3ntrotelcel.push(graficaProveedor[i]['C3ntro - Telcel']);
+    c3ntrotelcel.push(graficaProveedor[i]['C3ntro - Telcel']);
     //c3ntromovistar.push(graficaProveedor[i]['C3ntro - Movistar']);
     //c3ntrootros.push(graficaProveedor[i]['C3ntro - Otros']);
     //quiubasatt.push(graficaProveedor[i]['Quiubas - AT&T']);
@@ -96,14 +96,14 @@ var configProveedores = {
                 backgroundColor: chartColors.yellow,
                 borderColor: chartColors.yellow,
                 data: c3ntroatt
-            },
+            },*/
             {
                 label: 'C3ntro - Telcel',
                 fill: false,
                 backgroundColor: chartColors.green,
                 borderColor: chartColors.green,
                 data: c3ntrotelcel
-            },
+            },/*
             {
                 label: 'C3ntro - Movistar',
                 fill: false,
@@ -236,6 +236,7 @@ var dataAuronix = [];
 var dataQuiubas = [];
 var dataBancos = [];
 var dataConnect = [];
+var dataC3ntro = [];
 
 for (i = 0; i < graficaCliente.length; i++) {
     labelClientes.push(graficaCliente[i]['Cliente'].substr(0, 30));
@@ -243,6 +244,7 @@ for (i = 0; i < graficaCliente.length; i++) {
     dataQuiubas.push(graficaCliente[i]['Quiubas']);
     dataBancos.push(graficaCliente[i]['Auronix Bancos']);
     dataConnect.push(graficaCliente[i]['Connect']);
+    dataC3ntro.push(graficaCliente[i]['C3ntro']);
 };
 
 var dataClientes = {
@@ -262,6 +264,10 @@ var dataClientes = {
     }, {
         label: 'Connect',
         backgroundColor: window.chartColors.purple,
+        data: dataConnect
+    }, {
+        label: 'C3ntro',
+        backgroundColor: window.chartColors.orange,
         data: dataConnect
     }]
 };
