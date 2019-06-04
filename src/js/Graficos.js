@@ -15,7 +15,7 @@ var chartColors = {
 };
 //var prove2 = myResponse[0].Proveedor;
 
-// INICIA GRAFICA PROVEEDOR - CARRIER
+// INICIA GRAFICA LINEA PROVEEDOR - CARRIER
 var horas = [];
 var auronixatt = [];
 var auronixtelcel = [];
@@ -25,10 +25,10 @@ var auronixotros = [];
 var c3ntrotelcel = [];
 //var c3ntromovistar = [];
 //var c3ntrootros = [];
-//var quiubasatt = [];
-var quiubastelcel = [];
-//var quiubasmovistar = [];
-//var quiubasotros = [];
+var innovattiatt = [];
+var innovattiatelcel = [];
+var innovattiamovistar = [];
+var innovattiaotros = [];
 var connectatt = [];
 //var connecttelcel = [];
 var connectmovistar = [];
@@ -45,10 +45,10 @@ for (i = 0; i < graficaProveedor.length; i++) {
     c3ntrotelcel.push(graficaProveedor[i]['C3ntro - Telcel']);
     //c3ntromovistar.push(graficaProveedor[i]['C3ntro - Movistar']);
     //c3ntrootros.push(graficaProveedor[i]['C3ntro - Otros']);
-    //quiubasatt.push(graficaProveedor[i]['Quiubas - AT&T']);
-    quiubastelcel.push(graficaProveedor[i]['Quiubas - Telcel']);
-    //quiubasmovistar.push(graficaProveedor[i]['Quiubas - Movistar']);
-    //quiubasotros.push(graficaProveedor[i]['Quiubas - Otros']);
+    innovattiatt.push(graficaProveedor[i]['Innovattia - AT&T']);
+    innovattiatelcel.push(graficaProveedor[i]['Innovattia - Telcel']);
+    innovattiamovistar.push(graficaProveedor[i]['Innovattia - Movistar']);
+    innovattiaotros.push(graficaProveedor[i]['Innovattia - Otros']);
     connectatt.push(graficaProveedor[i]['Connect - AT&T']);
     //connecttelcel.push(graficaProveedor[i]['Connect - Telcel']);
     connectmovistar.push(graficaProveedor[i]['Connect - Movistar']);
@@ -119,34 +119,34 @@ var configProveedores = {
                 data: c3ntrootros
             },*/
             //Quiubas
-            /*{
-                label: 'Quiubas - AT&T',
+            {
+                label: 'Innovattia - AT&T',
                 fill: false,
                 backgroundColor: chartColors.lightBlue,
                 borderColor: chartColors.lightBlue,
-                data: quiubasatt
-            },*/
+                data: innovattiaatt
+            },
             {
-                label: 'Quiubas - Telcel',
+                label: 'Innovattia - Telcel',
                 fill: false,
                 backgroundColor: chartColors.brown,
                 borderColor: chartColors.brown,
-                data: quiubastelcel
+                data: innovattiatelcel
             },
-            /*{
-                label: 'Quiubas - Movistar',
+            {
+                label: 'Innovattia - Movistar',
                 fill: false,
                 backgroundColor: chartColors.aqua,
                 borderColor: chartColors.aqua,
-                data: quiubasmovistar
+                data: innovattiamovistar
             },
             {
-                label: 'Quiubas - Otros',
+                label: 'Innovattia - Otros',
                 fill: false,
                 backgroundColor: chartColors.beige,
                 borderColor: chartColors.beige,
-                data: quiubasotros
-            },*/
+                data: innovattiaotros
+            },
             //Connect
             {
                 label: 'Connect - AT&T',
@@ -229,11 +229,11 @@ var canvasCarrier = document.getElementById("chartCarrier");
 
 //TERMINA GRAFICA PIE CARRIER
 
-// INICIA GRAFICA CLIENTES
+// INICIA GRAFICA BARRAS CLIENTES
 
 var labelClientes = [];
 var dataAuronix = [];
-var dataQuiubas = [];
+var dataInnovattia = [];
 var dataBancos = [];
 var dataConnect = [];
 var dataC3ntro = [];
@@ -241,7 +241,7 @@ var dataC3ntro = [];
 for (i = 0; i < graficaCliente.length; i++) {
     labelClientes.push(graficaCliente[i]['Cliente'].substr(0, 30));
     dataAuronix.push(graficaCliente[i]['Auronix']);
-    dataQuiubas.push(graficaCliente[i]['Quiubas']);
+    dataInnovattia.push(graficaCliente[i]['Innovattia']);
     dataBancos.push(graficaCliente[i]['Auronix Bancos']);
     dataConnect.push(graficaCliente[i]['Connect']);
     dataC3ntro.push(graficaCliente[i]['C3ntro']);
@@ -254,9 +254,9 @@ var dataClientes = {
         backgroundColor: window.chartColors.blue,
         data: dataAuronix
     }, {
-        label: 'Quiubas',
+        label: 'Innovattia',
         backgroundColor: window.chartColors.red,
-        data: dataQuiubas
+        data: dataInnovattia
     }, {
         label: 'Auronix Bancos',
         backgroundColor: window.chartColors.green,
