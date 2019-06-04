@@ -25,7 +25,7 @@ var auronixotros = [];
 var c3ntrotelcel = [];
 //var c3ntromovistar = [];
 //var c3ntrootros = [];
-var innovattiatt = [];
+var innovattiaatt = [];
 var innovattiatelcel = [];
 var innovattiamovistar = [];
 var innovattiaotros = [];
@@ -45,7 +45,7 @@ for (i = 0; i < graficaProveedor.length; i++) {
     c3ntrotelcel.push(graficaProveedor[i]['C3ntro - Telcel']);
     //c3ntromovistar.push(graficaProveedor[i]['C3ntro - Movistar']);
     //c3ntrootros.push(graficaProveedor[i]['C3ntro - Otros']);
-    innovattiatt.push(graficaProveedor[i]['Innovattia - AT&T']);
+    innovattiaatt.push(graficaProveedor[i]['Innovattia - AT&T']);
     innovattiatelcel.push(graficaProveedor[i]['Innovattia - Telcel']);
     innovattiamovistar.push(graficaProveedor[i]['Innovattia - Movistar']);
     innovattiaotros.push(graficaProveedor[i]['Innovattia - Otros']);
