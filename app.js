@@ -82,8 +82,8 @@ app.get('/Graficas', function (req, res) {
     try {
             res.render('graficas',{
             graficaProveedor: Datos.GraficaProveedor,
-            graficaCarrier: Datos.GraficaCarrier,
-            graficaCliente: Datos.GraficaCliente
+            graficaCliente: Datos.GraficaCliente,
+            graficaDistProveedor: Datos.GraficaDistProveedor
         });    
     
     }

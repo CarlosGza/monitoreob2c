@@ -33,8 +33,8 @@
             <% include ../partials/nav-top %>
             
             <div id="principal" class="row container-fluid border-bottom" style="text-align:center;overflow:auto;">
-                <div id="Carrier-wrapper" style=" display:inline-block;text-align:center; margin:auto;" class="col-lg-4 ">
-                    <canvas id="chartCarrier"  class="animated bounceIn"></canvas>
+                <div id="Carrier-wrapper" style=" display:inline-block;text-align:center; margin:auto; " class="col-lg-4 ">
+                    <canvas id="chartDistProveedor"  class="animated bounceIn" ></canvas>
                 </div>
 
                 <div id="Proveedor-wrapper" style=" display:inline-block; min-width: 650px; text-align:center; margin:auto; " class="col-lg-8 ">
@@ -56,7 +56,7 @@
     
     <script>
         let graficaProveedor = <%- JSON.stringify(graficaProveedor) %>
-        let graficaCarrier = <%- JSON.stringify(graficaCarrier) %>
+        let graficaDistProveedor = <%- JSON.stringify(graficaDistProveedor) %>
         let graficaCliente = <%- JSON.stringify(graficaCliente) %>
     </script>
     <script src="/js/Graficos.js"></script>
