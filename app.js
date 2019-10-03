@@ -17,9 +17,9 @@ app.use('*/js',express.static('src/js'));
 app.use('*/images',express.static('src/images'));
 app.set('views', path.join(__dirname, 'src/pages'))
 app.set('view engine','ejs')
-app.use( bodyParser.json({limit: '50mb'}) );       // to support JSON-encoded bodies
+app.use( bodyParser.json({limit: '500mb'}) );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-    limit: '50mb',
+    limit: '500mb',
     extended: true
 })); 
 
