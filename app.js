@@ -92,7 +92,7 @@ app.get('/Graficas', function (req, res) {
     }
     
 });
-/*
+
 // Route /MensajesPrueba
 app.get('/MensajesPrueba', function (req, res) {
     try {
@@ -106,7 +106,7 @@ app.get('/MensajesPrueba', function (req, res) {
         res.send('Sin datos cargados')
     }
 });
-*/
+
 app.get('*', (req, res) => {
 	res.status(300).json('No existe esta ruta... Contacta a JC')
 })
