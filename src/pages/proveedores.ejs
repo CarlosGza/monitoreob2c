@@ -2,8 +2,8 @@
 <html >
 <head>
     <% include ../partials/head %>
-    <meta http-equiv="refresh" content="10">
-    <link rel="shortcut icon" href="/img/favicon.png" />
+    <!-- <meta http-equiv="refresh" content="10"> -->
+    
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
@@ -18,42 +18,56 @@
         <div id="page-wrapper" class="gray-bg">
             <% include ../partials/nav-top %>
             <div class="row container" >
-                <div id="exitosos-wrapper" class="col-lg-2" style="display: inline-block; " >
-                    <div class="widget  navy-bg" style="" >
+                <div id="exitosos-wrapper"  >
+                    <div class="widget  navy-bg" >
                         <div class="row vertical-align" >
                             <div class="col-xs-3" >
                                 <i class="fa fa-thumbs-up fa-3x" ></i>
                             </div>
-                            <div  class="col-xs-9 text-right" >
+                            <div  class="Exitosos text-right" >
                                 <span id="Exitosos" class="font-bold"><%= Exitosos.toLocaleString('en') %></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="noexitosos-wrapper" class="col-lg-2" style="display: inline-block; ">
+                <div id="noexitosos-wrapper" >
                     <div class="widget  navy-bg" style="background-color:#FF6666;">
                         <div class="row vertical-align">
-                            <div class="col-xs-3" >
+                            <div class="col-xs-2" >
                                 <i class="fa fa-thumbs-down fa-3x"></i>
                             </div>
-                            <div class="col-xs-9 text-right">
-                                <span id="NoExitosos" class="font-bold"><%= NoExitosos.toLocaleString('en') %></span>
+                            <div class="NoExitosos text-left">
+                                <p>Proveedor</p>
+                                <span id="" class="font-bold"><%= Proveedor.toLocaleString('en') %></span>
+                            </div>
+                            <div class="NoExitosos text-left">
+                                <p>Invalidos</p>
+                                <span id="" class="font-bold"><%= Invalidos.toLocaleString('en') %></span>
+                            </div>
+                            <div class="NoExitosos text-left">
+                                <p>Fijos</p>
+                                <span id="" class="font-bold"><%= Fijos.toLocaleString('en') %></span>
+                            </div>
+                            <div class="NoExitosos text-left">
+                                <p>Sin Saldo</p>
+                                <span id="" class="font-bold"><%= SinSaldo.toLocaleString('en') %></span>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
-                <div id="campanas-wrapper" class="col-lg-2" style="display: inline-block; ">
+                <!-- <div id="campanas-wrapper" class="col-lg-2" style="display: inline-block; ">
                     <div class="widget  navy-bg" style="background-color:lightblue;  ">
                         <div class="row vertical-align">
                             <div class="col-xs-3" >
                                 <i class="fa fa-tasks fa-3x "></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <span id="Campanas" class="font-bold"><%= Campanas.toLocaleString('en') %></span>
+                                <span id="Campanas" class="font-bold"><%= Proveedor.toLocaleString('en') %></span>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
             <!--inicia tabla-->
@@ -79,10 +93,12 @@
                                     <table id="GridProveedores" class="table table-striped table-bordered table-hover dataTables-example">
                                         <thead class="thead-dark">
                                             <tr>
+                                                <th>Servicio</th>
                                                 <th>Proveedor</th>
                                                 <th>Etiqueta</th>
                                                 <th>Exitosos</th>
                                                 <th>No Exitosos</th>
+                                                <th>Por Confirmar</th>
                                                 <th>En Cola</th>
                                                 <th>Tiempo en Cola</th>
                                             </tr>
@@ -100,11 +116,13 @@
                                             <% } else if (Date.parse('01/01/2011 '+record["Tiempo en cola"])>Date.parse('01/01/2011 00:01:00')) { %>
                                             <tr style="background-color: Orange; font-weight: bold; color: black; font-size: 1.3em;">
                                             <% } %>
+                                                <td><%= record.Servicio %></td>
                                                 <td><%= record.Proveedor %></td>
                                                 <td><%= record.Etiqueta %></td>
                                                 <td><%= record.Exitosos.toLocaleString('en') %></td>
                                                 <td><%= record["No Exitosos"].toLocaleString('en') %></td>
-                                                <td><%= record["En cola"] %></td>
+                                                <td><%= record["Por Confirmar"].toLocaleString('en') %></td>
+                                                <td><%= record["En cola"].toLocaleString('en') %></td>
                                                 <td><%= record["Tiempo en cola"] %></td>
                                             </tr>
                                             <% }) %>
