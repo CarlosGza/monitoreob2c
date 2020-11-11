@@ -156,15 +156,17 @@ var labelClientes = graficaCliente.map((row) => {
 let Proveedores2 = Object.keys(graficaCliente[0])
 Proveedores2.shift()
 Proveedores2.pop()
+
 let dataClientes = Proveedores2.map((proveedor) => {
 	return graficaCliente.map((row) => {
 		return row[proveedor]
 	})
 })
 
-var clientDatasets = graficaCliente.map((row, index) => {
+var clientDatasets = Proveedores2.map((proveedor, index) => {
 	return {
-		label: Proveedores2[index],
+		label: proveedor,
+		fill: false,
 		backgroundColor: chartColors2[index],
 		data: dataClientes[index],
 	}
