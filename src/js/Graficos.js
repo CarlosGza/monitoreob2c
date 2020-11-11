@@ -150,7 +150,7 @@ var canvasDistProveedor = document.getElementById('chartDistProveedor')
 // INICIA GRAFICA BARRAS CLIENTES
 
 var labelClientes = graficaCliente.map((row) => {
-	console.log(row)
+	//console.log(row)
 	return row.Cliente.substr(0, 30)
 })
 let Proveedores2 = Object.keys(graficaCliente[0])
@@ -168,6 +168,17 @@ var clientDatasets = graficaCliente.map((row, index) => {
 		backgroundColor: chartColors2[index],
 		data: dataClientes[index],
 	}
+})
+let vacios2 = []
+dataClientes.map((proveedor, index) => {
+	if (proveedor.reduce((a, b) => a + b, 0) === 0) {
+		vacios2.push(index)
+	}
+})
+vacios2.reverse().map((index) => {
+	Proveedores2.splice(index, 1)
+	dataClientes.splice(index, 1)
+	clientDatasets.splice(index, 1)
 })
 
 var dataClientes2 = {
