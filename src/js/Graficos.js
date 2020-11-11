@@ -1,341 +1,235 @@
-﻿
-var chartColors = {
-    red: 'rgb(255, 99, 132)',
-    orange: 'rgb(255, 159, 64)',
-    yellow: 'rgb(255, 205, 86)',
-    green: 'rgb(75, 192, 192)',
-    blue: 'rgb(54, 162, 235)',
-    purple: 'rgb(153, 102, 255)',
-    grey: 'rgb(201, 203, 207)',
-    paleGreen: 'rgb(152,251,152)',
-    lightBlue: 'rgb(173,216,230)',
-    brown: 'rgb(128,0,0)',
-    aqua: 'rgb(0,255,255)',
-    beige: 'rgb(245,245,220)'
-};
+﻿let chartColors = {
+	red: 'rgb(255, 99, 132)',
+	orange: 'rgb(255, 159, 64)',
+	yellow: 'rgb(255, 205, 86)',
+	green: 'rgb(75, 192, 192)',
+	blue: 'rgb(54, 162, 235)',
+	purple: 'rgb(153, 102, 255)',
+	grey: 'rgb(201, 203, 207)',
+	paleGreen: 'rgb(152,251,152)',
+	lightBlue: 'rgb(173,216,230)',
+	brown: 'rgb(128,0,0)',
+	aqua: 'rgb(0,255,255)',
+	beige: 'rgb(245,245,220)',
+}
+let chartColors2 = [
+	'rgb(54, 162, 235)',
+	'rgb(255, 99, 132)',
+	'rgb(255, 159, 64)',
+	'rgb(255, 205, 86)',
+	'rgb(75, 192, 192)',
+	'rgb(153, 102, 255)',
+	'rgb(201, 203, 207)',
+	'rgb(152,251,152)',
+	'rgb(173,216,230)',
+	'rgb(128,0,0)',
+	'rgb(0,255,255)',
+	'rgb(245,245,220)',
+	'rgb(255, 99, 132)',
+	'rgb(255, 159, 64)',
+	'rgb(255, 205, 86)',
+	'rgb(75, 192, 192)',
+	'rgb(54, 162, 235)',
+	'rgb(153, 102, 255)',
+	'rgb(201, 203, 207)',
+	'rgb(152,251,152)',
+	'rgb(173,216,230)',
+	'rgb(128,0,0)',
+	'rgb(0,255,255)',
+	'rgb(245,245,220)',
+]
 
-function addCommas(nStr)
-{
-    nStr += '';
-    x = nStr.split('.');
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-    return x1 + x2;
+function addCommas(nStr) {
+	nStr += ''
+	x = nStr.split('.')
+	x1 = x[0]
+	x2 = x.length > 1 ? '.' + x[1] : ''
+	var rgx = /(\d+)(\d{3})/
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, '$1' + ',' + '$2')
+	}
+	return x1 + x2
 }
 
-
 // INICIA GRAFICA LINEA PROVEEDOR - CARRIER
-var horas = [];
-var auronixatt = [];
-var auronixtelcel = [];
-var auronixmovistar = [];
-var auronixotros = [];
-//var c3ntroatt = [];
-var c3ntrotelcel = [];
-//var c3ntromovistar = [];
-//var c3ntrootros = [];
-var innovattiaatt = [];
-var innovattiatelcel = [];
-var innovattiamovistar = [];
-var innovattiaotros = [];
-var connectatt = [];
-//var connecttelcel = [];
-var connectmovistar = [];
-var connectotros = [];
 
-for (i = 0; i < graficaProveedor.length; i++) {
+let horas = graficaProveedor.map((row) => {
+	return row.Hora
+})
 
-    horas.push(graficaProveedor[i].Hora);
-    auronixatt.push(graficaProveedor[i]['Auronix - AT&T']);
-    auronixtelcel.push(graficaProveedor[i]['Auronix - Telcel']);
-    auronixmovistar.push(graficaProveedor[i]['Auronix - Movistar']);
-    auronixotros.push(graficaProveedor[i]['Auronix - Otros']);
-    //c3ntroatt.push(graficaProveedor[i]['C3ntro - AT&T']);
-    c3ntrotelcel.push(graficaProveedor[i]['C3ntro - Telcel']);
-    //c3ntromovistar.push(graficaProveedor[i]['C3ntro - Movistar']);
-    //c3ntrootros.push(graficaProveedor[i]['C3ntro - Otros']);
-    innovattiaatt.push(graficaProveedor[i]['Innovattia - AT&T']);
-    innovattiatelcel.push(graficaProveedor[i]['Innovattia - Telcel']);
-    innovattiamovistar.push(graficaProveedor[i]['Innovattia - Movistar']);
-    innovattiaotros.push(graficaProveedor[i]['Innovattia - Otros']);
-    connectatt.push(graficaProveedor[i]['Connect - AT&T']);
-    //connecttelcel.push(graficaProveedor[i]['Connect - Telcel']);
-    connectmovistar.push(graficaProveedor[i]['Connect - Movistar']);
-    connectotros.push(graficaProveedor[i]['Connect - Otros']);
-};
+let Proveedores = Object.keys(graficaProveedor[0])
+Proveedores.shift()
+
+let dataProveedores = Proveedores.map((proveedor) => {
+	return graficaProveedor.map((row) => {
+		return row[proveedor]
+	})
+})
+
+let provDatasets = Proveedores.map((proveedor, index) => {
+	return {
+		label: proveedor,
+		fill: false,
+		backgroundColor: chartColors2[index],
+		borderColor: chartColors2[index],
+		data: dataProveedores[index],
+	}
+})
+let vacios = []
+dataProveedores.map((proveedor, index) => {
+	if (proveedor.reduce((a, b) => a + b, 0) === 0) {
+		vacios.push(index)
+	}
+})
+vacios.reverse().map((index) => {
+	Proveedores.splice(index, 1)
+	dataProveedores.splice(index, 1)
+	provDatasets.splice(index, 1)
+})
 
 var configProveedores = {
-    type: 'line',
-    data: {
-        labels: horas,
-        datasets: [
-            //Auronix
-            {
-                label: 'Auronix - AT&T',
-                fill: false,
-                backgroundColor: chartColors.red,
-                borderColor: chartColors.red,
-                data: auronixatt
-            },
-            {
-                label: 'Auronix - Telcel',
-                fill: false,
-                backgroundColor: chartColors.blue,
-                borderColor: chartColors.blue,
-                data: auronixtelcel
-            },
-            {
-                label: 'Auronix - Movistar',
-                fill: false,
-                backgroundColor: chartColors.orange,
-                borderColor: chartColors.orange,
-                data: auronixmovistar
-            },
-            {
-                label: 'Auronix - Otros',
-                fill: false,
-                backgroundColor: chartColors.paleGreen,
-                borderColor: chartColors.paleGreen,
-                data: auronixotros
-            },
-            //C3ntro
-            /*{
-                label: 'C3ntro - AT&T',
-                fill: false,
-                backgroundColor: chartColors.yellow,
-                borderColor: chartColors.yellow,
-                data: c3ntroatt
-            },*/
-            {
-                label: 'C3ntro - Telcel',
-                fill: false,
-                backgroundColor: chartColors.green,
-                borderColor: chartColors.green,
-                data: c3ntrotelcel
-            },/*
-            {
-                label: 'C3ntro - Movistar',
-                fill: false,
-                backgroundColor: chartColors.purple,
-                borderColor: chartColors.purple,
-                data: c3ntromovistar
-            },
-            {
-                label: 'C3ntro - Otros',
-                fill: false,
-                backgroundColor: chartColors.grey,
-                borderColor: chartColors.grey,
-                data: c3ntrootros
-            },*/
-            //Quiubas
-            {
-                label: 'Innovattia - AT&T',
-                fill: false,
-                backgroundColor: chartColors.lightBlue,
-                borderColor: chartColors.lightBlue,
-                data: innovattiaatt
-            },
-            {
-                label: 'Innovattia - Telcel',
-                fill: false,
-                backgroundColor: chartColors.brown,
-                borderColor: chartColors.brown,
-                data: innovattiatelcel
-            },
-            {
-                label: 'Innovattia - Movistar',
-                fill: false,
-                backgroundColor: chartColors.aqua,
-                borderColor: chartColors.aqua,
-                data: innovattiamovistar
-            },
-            {
-                label: 'Innovattia - Otros',
-                fill: false,
-                backgroundColor: chartColors.beige,
-                borderColor: chartColors.beige,
-                data: innovattiaotros
-            },
-            //Connect
-            {
-                label: 'Connect - AT&T',
-                fill: false,
-                backgroundColor: chartColors.lightBlue,
-                borderColor: chartColors.lightBlue,
-                data: connectatt
-            },
-            /*{
-                label: 'Connect - Telcel',
-                fill: false,
-                backgroundColor: chartColors.beige,
-                borderColor: chartColors.beige,
-                data: connecttelcel
-            },*/
-            {
-                label: 'Connect - Movistar',
-                fill: false,
-                backgroundColor: chartColors.aqua,
-                borderColor: chartColors.aqua,
-                data: connectmovistar
-            },
-            {
-                label: 'Connect - Otros',
-                fill: false,
-                backgroundColor: chartColors.grey,
-                borderColor: chartColors.grey,
-                data: connectotros
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        title: {
-            display: true,
-            text: 'Proveedor - Carrier',
-            fontFamily: 'sans-serif',
-            fontSize: 20
-        },
-        legend: {
-            position: 'right'
-        }
-    }
-};
+	type: 'line',
+	data: {
+		labels: horas,
+		datasets: provDatasets,
+	},
+	options: {
+		responsive: true,
+		title: {
+			display: true,
+			text: 'Proveedor - Horas',
+			fontFamily: 'sans-serif',
+			fontSize: 20,
+		},
+		legend: {
+			position: 'right',
+		},
+	},
+}
 
-var canvasProveedores = document.getElementById("chartProveedores").getContext('2d');
+var canvasProveedores = document
+	.getElementById('chartProveedores')
+	.getContext('2d')
 
 // TERMINA GRAFICA PROVEEDOR - CARRIER
 
 // INICIA GRAFICA DONA PROVEEDOR
-var labelProveedor = [];
-var dataProveedor = [];
-var totalExitosos = 0;
+var labelProveedor = []
+var dataProveedor = []
+var totalExitosos = 0
 for (i = 0; i < graficaDistProveedor.length; i++) {
-    labelProveedor.push(graficaDistProveedor[i]['Proveedor']);
-    dataProveedor.push(graficaDistProveedor[i]['Cant']);
-    totalExitosos = totalExitosos + graficaDistProveedor[i]['Cant'];
-};
+	labelProveedor.push(graficaDistProveedor[i]['Proveedor'])
+	dataProveedor.push(graficaDistProveedor[i]['Cant'])
+	totalExitosos = totalExitosos + graficaDistProveedor[i]['Cant']
+}
 var configProveedor = {
-    type: 'doughnut',
-    data: {
-        labels: labelProveedor,
-        datasets: [{
-            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-            data: dataProveedor
-        }]
-    },
-    options: {
-        title: {
-            display: true,
-            text: 'Mensajes por Proveedor',
-            fontFamily: 'sans-serif',
-            fontSize: 20
-        }
-    }
+	type: 'doughnut',
+	data: {
+		labels: labelProveedor,
+		datasets: [
+			{
+				backgroundColor: chartColors2,
+				data: dataProveedor,
+			},
+		],
+	},
+	options: {
+		title: {
+			display: true,
+			text: 'Mensajes por Proveedor',
+			fontFamily: 'sans-serif',
+			fontSize: 20,
+		},
+	},
 }
 
-
-var canvasDistProveedor = document.getElementById("chartDistProveedor");
+var canvasDistProveedor = document.getElementById('chartDistProveedor')
 
 //TERMINA GRAFICA DONA PROVEEDOR
 
-
-
 // INICIA GRAFICA BARRAS CLIENTES
 
-var labelClientes = [];
-var dataAuronix = [];
-var dataInnovattia = [];
-var dataBancos = [];
-var dataConnect = [];
-var dataC3ntro = [];
+var labelClientes = graficaCliente.map((row) => {
+	console.log(row)
+	return row.Cliente.substr(0, 30)
+})
+let Proveedores2 = Object.keys(graficaCliente[0])
+Proveedores2.shift()
+Proveedores2.pop()
+let dataClientes = Proveedores2.map((proveedor) => {
+	return graficaCliente.map((row) => {
+		return row[proveedor]
+	})
+})
 
-for (i = 0; i < graficaCliente.length; i++) {
-    labelClientes.push(graficaCliente[i]['Cliente'].substr(0, 30));
-    dataAuronix.push(graficaCliente[i]['Auronix']);
-    dataInnovattia.push(graficaCliente[i]['Innovattia']);
-    dataBancos.push(graficaCliente[i]['Auronix Bancos']);
-    dataConnect.push(graficaCliente[i]['Connect']);
-    dataC3ntro.push(graficaCliente[i]['C3ntro']);
-};
+var clientDatasets = graficaCliente.map((row, index) => {
+	return {
+		label: Proveedores2[index],
+		backgroundColor: chartColors2[index],
+		data: dataClientes[index],
+	}
+})
 
-var dataClientes = {
-    labels: labelClientes,
-    datasets: [{
-        label: 'Auronix',
-        backgroundColor: window.chartColors.blue,
-        data: dataAuronix
-    }, {
-        label: 'Innovattia',
-        backgroundColor: window.chartColors.red,
-        data: dataInnovattia
-    }, {
-        label: 'Auronix Bancos',
-        backgroundColor: window.chartColors.green,
-        data: dataBancos
-    }, {
-        label: 'Connect',
-        backgroundColor: window.chartColors.purple,
-        data: dataConnect
-    }, {
-        label: 'C3ntro',
-        backgroundColor: window.chartColors.orange,
-        data: dataC3ntro
-    }]
-};
-
-var configClientes = {
-    type: 'bar',
-    data: dataClientes,
-    options: {
-        title: {
-            display: true,
-            text: 'Clientes - Proveedor',
-            fontFamily: 'sans-serif',
-            fontSize: 20
-
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false,
-            callbacks: {
-                label:  function(tooltipItem, data) {
-                    return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }
-            }
-        },
-        responsive: true,
-        scales: {
-            xAxes: [{
-                stacked: true,
-                ticks: {
-                    autoSkip: false,
-                    maxRotation: 90,
-                    minRotation: 90,
-                    fontSize: 10
-                }
-            }],
-            yAxes: [{
-                stacked: true,
-                ticks: {
-                    callback: function(value, index, values) {
-                        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    }
-                }
-            }]
-        }
-    }
+var dataClientes2 = {
+	labels: labelClientes,
+	datasets: clientDatasets,
 }
 
-var canvasClientes = document.getElementById('chartClientes').getContext('2d');
+var configClientes = {
+	type: 'bar',
+	data: dataClientes2,
+	options: {
+		title: {
+			display: true,
+			text: 'Clientes - Proveedor',
+			fontFamily: 'sans-serif',
+			fontSize: 20,
+		},
+		tooltips: {
+			mode: 'index',
+			intersect: false,
+			callbacks: {
+				label: function (tooltipItem, data) {
+					return (
+						data.datasets[tooltipItem.datasetIndex].label +
+						': ' +
+						tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+					)
+				},
+			},
+		},
+		responsive: true,
+		scales: {
+			xAxes: [
+				{
+					stacked: true,
+					ticks: {
+						autoSkip: false,
+						maxRotation: 90,
+						minRotation: 90,
+						fontSize: 10,
+					},
+				},
+			],
+			yAxes: [
+				{
+					stacked: true,
+					ticks: {
+						callback: function (value, index, values) {
+							return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+						},
+					},
+				},
+			],
+		},
+	},
+}
 
+var canvasClientes = document.getElementById('chartClientes').getContext('2d')
 
 // TERMINA GRAFICA CLIENTES
 
 // Renderiza Graficas
-var myDoughnutChart = new Chart(canvasDistProveedor, configProveedor);
-var myLineChart = new Chart(canvasProveedores, configProveedores);
-var myBarChart = new Chart(canvasClientes, configClientes);
+var myDoughnutChart = new Chart(canvasDistProveedor, configProveedor)
+var myLineChart = new Chart(canvasProveedores, configProveedores)
+var myBarChart = new Chart(canvasClientes, configClientes)
