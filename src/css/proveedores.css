@@ -1,25 +1,27 @@
-#Exitosos{
-    font-size: 2em;
+#Exitosos {
+	font-size: 2em;
 }
-.NoExitosos{
-    font-size: 1em;
-    min-width: 50px;
+.NoExitosos {
+	font-size: 1em;
+	min-width: 50px;
 }
 p {
-    margin: 0px;
+	margin: 0px;
 }
-.col-xs-2,.col-xs-3 {
-    margin-right: 30px;
+.col-xs-2,
+.col-xs-3 {
+	margin-right: 30px;
 }
-.NoExitosos,.Exitosos {
-    margin-left: 5px;
+.NoExitosos,
+.Exitosos {
+	margin-left: 5px;
 }
 
 .row.container {
-    display: flex;
-    justify-content: flex-start;
-    column-gap: 10px;
-    flex-wrap: wrap;
+	display: flex;
+	justify-content: flex-start;
+	column-gap: 10px;
+	flex-wrap: wrap;
 }
 /* 
 @media (min-width: 711px) {
