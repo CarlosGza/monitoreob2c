@@ -97,8 +97,9 @@
                                             <% } else {%>
                                             <tr>
                                             <% } %>
-                                                
-                                                <td><%= record.IdEnvioPr %></td>
+                                                <td >
+                                                    <a style="color: black" href="https://tink.marcatel.com.mx/Catalogos/wfAEnviosEdicionBlaster.aspx?IdEnvioPr=<%= record.IdEnvioPr%>&A=E" target="_blank">
+                                                        <%= record.IdEnvioPr %></a></td>
                                                 <td><%= record.Cliente %></td>
                                                 <td><%= record.Total.toLocaleString('en') %></td>
                                                 <td><%= record.SinProcesar.toLocaleString('en') %></td>
