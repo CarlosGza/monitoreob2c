@@ -2,14 +2,9 @@
 <html >
 <head>
     <% include ../partials/head %>
-    <!-- <meta http-equiv="refresh" content="10"> -->
+   
     
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/proveedores.css" rel="stylesheet">
-    <link href="/css/plugins/dataTables/datatables.min.css" rel="stylesheet" />
+
 </head>
 <body class="mini-navbar">
 
@@ -46,17 +41,18 @@
                                                 <th>HoraMonitor</th>
                                                 <th>Etiqueta</th>
                                                 <th>TelefonoEmisor</th>
-                                                <th>FechaEnvio</th>
-                                                <th>FechaRecibido</th>
-                                                <th>Diff_Segundos</th>
-                                                <th>Diff_Minutos</th>
+                                                <th>HoraEnvio</th>
+                                                <th>HoraRecibido</th>
+                                                <th>Delay</th>
                                             </tr>
                                         </thead>
                                         <tbody id="datos-tabla">
                                             <!--Pinta alertas en tabla proveedores--> 
                                             <% MensajesPrueba.forEach(function(record){ %>
-                                            <% if (record.Diff_Minutos == -1) { %>
+                                            <% if (record.TelefonoEmisor === 'No Recibido') { %>
                                             <tr style="background-color: Red; font-weight: bold; color: black;">
+                                            <% } else if (Date.parse('01/01/2011 '+record.Delay)>Date.parse('01/01/2011 00:01:30')){ %>
+                                            <tr style="background-color: orange; font-weight: bold; color: black;">
                                             <% } else { %>
                                             <tr>
                                             <% } %>
@@ -65,10 +61,9 @@
                                                 <td><%= record.HoraMonitor %></td>
                                                 <td><%= record.Etiqueta %></td>
                                                 <td><%= record.TelefonoEmisor %></td>
-                                                <td><%= record.FechaEnvio.substring(0,19).replace('T',' ') %></td>
-                                                <td><%= record.FechaRecibido.substring(0,19).replace('T',' ') %></td>
-                                                <td><%= record.Diff_Segundos %></td>
-                                                <td><%= record.Diff_Minutos %></td>
+                                                <td><%= record.HoraEnvio%></td>
+                                                <td><%= record.HoraRecibido %></td>
+                                                <td><%= record.Delay %></td>
                                             </tr>
                                             <% }) %>
 
@@ -89,6 +84,7 @@
         </div>
     </div>
     <% include ../partials/scripts %>
+    
     
 </body>
 </html>

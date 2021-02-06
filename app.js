@@ -11,7 +11,8 @@ let Datos = {}
 // settings
 app.use('*/css', express.static('src/css'))
 app.use('*/js', express.static('src/js'))
-app.use('*/images', express.static('src/images'))
+app.use('*/images', express.static('src/img'))
+app.use('*/audio', express.static('src/audio'))
 app.set('views', path.join(__dirname, 'src/pages'))
 app.use(favicon(path.join(__dirname, 'src', 'favicon.ico')))
 app.set('view engine', 'ejs')
@@ -31,74 +32,70 @@ app.post('/', function (req, res) {
 })
 
 // Route /Proveedores
-app.get(['/', '/Proveedores'], function (req, res) {
-	if (!Datos.MonitorProveedores) return res.send('No hay datos por mostrar')
+app.get(['/', '/Mensajeria'], function (req, res) {
+	if (!Datos.MonitorProveedores || !Datos.MonitorNoMigrados) return res.render('empty')
 	try {
-		res.render('proveedores', {
-			MonitorProveedores: Datos.MonitorProveedores,
-			Exitosos: Datos.Exitosos,
-			Proveedor: Datos.Proveedor,
-			Invalidos: Datos.Invalidos,
-			Fijos: Datos.Fijos,
-			SinSaldo: Datos.SinSaldo,
-		})
+		res.render('mensajeria', Datos )
 	} catch (err) {
-		res.send('Sin datos cargados')
+		res.render('empty')
 	}
 })
 
-// Route /Envios
-/* app.get('/Envios', function (req, res) {
+// Route /Usuarios
+app.get('/Usuarios', function (req, res) {
+	if (!Datos.Usuarios) return res.render('empty')
 	try {
-		res.render('envios', {
-			MonitorEnvios: Datos.MonitorEnvios,
-		})
+		res.render('usuarios', Datos)
 	} catch (err) {
-		res.send('Sin datos cargados')
+		res.render('empty')
+	}
+})
+
+/* // Route /Mensajeria
+app.get('/Mensajeria', function (req, res) {
+	if (!Datos.MonitorNoMigrados) return res.render('empty')
+	try {
+		res.render('mensajeria', Datos)
+	} catch (err) {
+		res.render('empty')
 	}
 }) */
 
-// Route /Programados
-app.get('/Programados', function (req, res) {
-	if (!Datos.MonitorNoMigrados) return res.send('No hay datos por mostrar')
+// Route /Blaster
+app.get('/Blaster', function (req, res) {
+	if (!Datos.MonitorBlaster) return res.render('empty')
 	try {
-		res.render('programados', {
-			MonitorNoMigrados: Datos.MonitorNoMigrados,
-		})
+		res.render('blaster', Datos)
 	} catch (err) {
-		res.send('Sin datos cargados')
+		res.render('empty')
 	}
 })
 
 // Route /Graficas
 app.get('/Graficas', function (req, res) {
-	if (!Datos.GraficaProveedor || !Datos.GraficaCliente || !Datos.GraficaDistProveedor) return res.send('No hay datos por mostrar')
+	if (!Datos.GraficaProveedor || !Datos.GraficaCliente || !Datos.GraficaDistProveedor) return res.render('empty')
 	try {
-		res.render('graficas', {
-			graficaProveedor: Datos.GraficaProveedor,
-			graficaCliente: Datos.GraficaCliente,
-			graficaDistProveedor: Datos.GraficaDistProveedor,
-		})
+		res.render('graficas', Datos)
 	} catch (err) {
-		res.send('Sin datos cargados')
+		res.render('empty')
 	}
 })
 
 // Route /MensajesPrueba
 app.get('/MensajesPrueba', function (req, res) {
-	if (!Datos.MensajesPrueba) return res.send('No hay datos por mostrar')
+	if (!Datos.MensajesPrueba) return res.render('empty')
 	try {
-		res.render('mensajesprueba', {
-			MensajesPrueba: Datos.MensajesPrueba,
-		})
+		res.render('mensajesprueba', Datos)
 	} catch (err) {
-		res.send('Sin datos cargados')
+		res.render('empty')
 	}
 })
 
 app.get('*', (req, res) => {
 	res.status(300).json('No existe esta ruta... Contacta a JC')
 })
+
+
 
 // Server Listen
 var server = app.listen(port, function () {

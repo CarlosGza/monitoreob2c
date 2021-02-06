@@ -34,12 +34,98 @@
         ordering: false,
         pageLength: 25
     });
-    $('#GridEnvios').DataTable({
+    $('#GridNoMigrados').DataTable({
+        ordering: false,
+        pageLength: 10
+    });
+    $('#GridEtiquetas').DataTable({
+        ordering: false,
+        pageLength: 10
+    });
+    $('#GridUsuarios').DataTable({
         ordering: false,
         pageLength: 25
     });
-   
+    $('#GridBlaster').DataTable({
+        ordering: false,
+        pageLength: 10
+    });
+    let audio = document.getElementById('alertAudio')
+    const changeFavicon = () => {
+        let favicon = document.querySelector('link[rel="icon"]')
+        if (favicon !== null) {
+            favicon.href = 'data:image/x-icon;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA+vr6AADy/wC/v78AG8fyAObm5gAFBQUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFVVVVVVVUQFTMzMzMzM1AERERERERDUAQiImYiIkUAACIiZiIiMQAAQiIiIiRQAAACIgAiIxAAAAQiACJFAAAAACIAIjEAAAAAQgAkUAAAAAACACMQAAAAAAQiRQAAAAAAACIxAAAAAAAARFAAAAAAAAAAAAAAD//wAAwAAAAIAAAADAAAAAwAEAAOABAADgAwAA8AMAAPAHAAD4BwAA+A8AAPwPAAD8HwAA/h8AAP4/AAD//wAA'
+        } else {
+            favicon = document.createElement("link")
+            favicon.rel = "icon"
+            favicon.href = 'data:image/x-icon;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA+vr6AADy/wC/v78AG8fyAObm5gAFBQUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFVVVVVVVUQFTMzMzMzM1AERERERERDUAQiImYiIkUAACIiZiIiMQAAQiIiIiRQAAACIgAiIxAAAAQiACJFAAAAACIAIjEAAAAAQgAkUAAAAAACACMQAAAAAAQiRQAAAAAAACIxAAAAAAAARFAAAAAAAAAAAAAAD//wAAwAAAAIAAAADAAAAAwAEAAOABAADgAwAA8AMAAPAHAAD4BwAA+A8AAPwPAAD8HwAA/h8AAP4/AAD//wAA'
+            document.head.appendChild(favicon)
+            
+            audio.setAttribute('loop','true')
+            audio.play()
+        }
+    }
+    const alertMensajeria = () =>{
+        let menuMensajeria = document.getElementById('menuMensajeria')
+        menuMensajeria.style.backgroundColor = '#FF6347'
+    }
+    /* const alertCampanias = () =>{
+        let menuCampanias = document.getElementById('menuCampanias')
+        menuCampanias.style.backgroundColor = '#FF6347'
+    } */
+    const alertGraficas = () =>{
+        let menuGraficas = document.getElementById('menuGraficas')
+        menuGraficas.style.backgroundColor = '#FF6347'
+    }
+    const alertMensajesPrueba = () =>{
+        let menuMensajesPrueba = document.getElementById('menuMensajesPrueba')
+        menuMensajesPrueba.style.backgroundColor = '#FF6347'
+    }
+    const alertUsuarios = () =>{
+        let menuUsuarios = document.getElementById('menuUsuarios')
+        menuUsuarios.style.backgroundColor = '#FF6347'
+    }
+    const checkAlerts =  () => {
+        let MensajesPrueba = <%- JSON.stringify(MensajesPrueba) %>
+        let horaultimoenvio = MensajesPrueba.length > 0 ? MensajesPrueba[0].HoraMonitor : ''
+        let ultimoenviodelay = MensajesPrueba.filter(el =>{ return el.HoraMonitor == horaultimoenvio && el.Diff_Segundos > 89})
+        if (ultimoenviodelay.length > 0) {
+            changeFavicon()
+            alertMensajesPrueba()
+        }
+
+        let Usuarios = <%- JSON.stringify(Usuarios) %>
+        let errorUsuarios = Usuarios.filter(el =>{ return el.Problema !== ''})
+        if (errorUsuarios.length > 0) {
+            changeFavicon()
+            alertUsuarios()
+        }
+
+        let MonitorProveedores = <%- JSON.stringify(MonitorProveedores) %>
+        let delayProveedores = MonitorProveedores.filter(el =>{ return Date.parse('01/01/2011 '+el["Tiempo en cola"])>Date.parse('01/01/2011 00:05:00')})
+        if (delayProveedores.length > 0) {
+            changeFavicon()
+            alertMensajeria()
+        }
+
+        let MonitorNoMigrados = <%- JSON.stringify(MonitorNoMigrados) %>
+        let delayNoMigrados = MonitorNoMigrados.filter(el =>{ return el.Segmentado == 'NO' && Date.parse('01/01/2011 '+el["Delay"])>Date.parse('01/01/2011 00:05:00')})
+        if (delayNoMigrados.length > 0) {
+            changeFavicon()
+            alertMensajeria()
+        }
+    }
+    checkAlerts()
     
-    
+    let refresh = true
+    let ultimaActualizacion = document.getElementById('actualizacion').innerText
+    setInterval(()=>{
+        refresh ? window.location.reload() : ''
+        }, 60000);
+    document.getElementById('actualizacion').addEventListener('click',()=>{
+        refresh = !refresh
+        refresh ? document.getElementById('actualizacion').innerText = ultimaActualizacion : document.getElementById('actualizacion').innerText = 'Detenido'
+        //console.log(refresh)
+    })
 
 </script>

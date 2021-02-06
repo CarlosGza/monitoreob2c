@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <% include ../partials/head %>
+   
+    
+
+</head>
+<body class="mini-navbar">
+
+    <div id="wrapper">
+        <% include ../partials/nav-izq %>
+        <div id="page-wrapper" class="gray-bg">
+            <% include ../partials/nav-top %>
+            
+            <!--inicia tabla-->
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <!-- Etiquetas -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Usuarios</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+
+                                <div class="table-responsive">
+                                    <table id="GridUsuarios" class="table table-striped table-bordered table-hover dataTable" role="grid">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>IdUsuario</th>
+                                                <th>Usuario</th>
+                                                <th>IdCliente</th>
+                                                <th>Cliente</th>
+                                                <th>2Vias</th>
+                                                <th>Exclusivo</th>
+                                                <th>Mascara</th>
+                                                <th>SMS</th>
+                                                <th>MMS</th>
+                                                <th>Blaster</th>
+                                                <th>FLASH</th>
+                                                <th>RCS</th>
+                                                <th>Problema</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="datos-tabla">
+                                            <!--Pinta alertas en tabla proveedores--> 
+                                            <% Usuarios.forEach(function(record){ %>
+                                            <% if (record.Problema != '') { %>
+                                            <tr style="background-color: Red; font-weight: bold; color: black;">
+                                            <% } else { %>
+                                            <tr>
+                                            <% } %>
+                                                <td> <a style="color: black" href="https://tink.marcatel.com.mx/Administracion/EdicionUsuarios.aspx?IdUsuario=<%= record.IdUsuario %>&A=E" target="_blank"><%= record.IdUsuario %></a></td>
+                                                <td><%= record.Usuario %></td>
+                                                <td><%= record.IdCliente %></td>
+                                                <td><%= record.Cliente %></td>
+                                                <td><%= record.DosVias %></td>
+                                                <td><%= record.Exclusivo %></td>
+                                                <td><%= record.Mascara %></td>
+                                                <td><%= record.LimiteSMS.toLocaleString('en') %></td>
+                                                <td><%= record.LimiteMMS.toLocaleString('en') %></td>
+                                                <td><%= record.LimiteBlaster.toLocaleString('en') %></td>
+                                                <td><%= record.LimiteUSSD.toLocaleString('en') %></td>
+                                                <td><%= record.LimiteRCS.toLocaleString('en') %></td>
+                                                <td><%= record.Problema %></td>
+                                            </tr>
+                                            <% }) %>
+
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- termina tabla-->
+            
+            <% include ../partials/footer %>
+        </div>
+    </div>
+    <% include ../partials/scripts %>
+    
+    
+</body>
+</html>

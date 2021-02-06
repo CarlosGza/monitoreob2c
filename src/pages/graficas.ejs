@@ -2,15 +2,9 @@
 <html >
 <head>
     <% include ../partials/head %>
-    <!-- <meta http-equiv="refresh" content="30"> -->
     
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/proveedores.css" rel="stylesheet">
-    <link href="/css/plugins/dataTables/datatables.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    
+
     <style>
         @media(max-width: 1230px){
             #principal,#Carrier-wrapper{
@@ -55,9 +49,9 @@
     <% include ../partials/scripts %>
     
     <script>
-        let graficaProveedor = <%- JSON.stringify(graficaProveedor) %>
-        let graficaDistProveedor = <%- JSON.stringify(graficaDistProveedor) %>
-        let graficaCliente = <%- JSON.stringify(graficaCliente) %>
+        let graficaProveedor = <%- JSON.stringify(GraficaProveedor) %>
+        let graficaDistProveedor = <%- JSON.stringify(GraficaDistProveedor) %>
+        let graficaCliente = <%- JSON.stringify(GraficaCliente) %>
     </script>
     <script src="/js/Graficos.js"></script>
     
