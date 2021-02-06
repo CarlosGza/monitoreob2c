@@ -69,10 +69,10 @@
         let menuMensajeria = document.getElementById('menuMensajeria')
         menuMensajeria.style.backgroundColor = '#FF6347'
     }
-    /* const alertCampanias = () =>{
-        let menuCampanias = document.getElementById('menuCampanias')
-        menuCampanias.style.backgroundColor = '#FF6347'
-    } */
+    const alertBlaster = () =>{
+        let menuBlaster = document.getElementById('menuBlaster')
+        menuBlaster.style.backgroundColor = '#FF6347'
+    }
     const alertGraficas = () =>{
         let menuGraficas = document.getElementById('menuGraficas')
         menuGraficas.style.backgroundColor = '#FF6347'
@@ -113,6 +113,12 @@
         if (delayNoMigrados.length > 0) {
             changeFavicon()
             alertMensajeria()
+        }
+        let MonitorBlaster = <%- JSON.stringify(MonitorBlaster) %>
+        let delayBlaster = MonitorBlaster.filter(el =>{ return Date.parse('01/01/2011 '+el["Delay"])>Date.parse('01/01/2011 00:05:00')})
+        if (delayBlaster.length > 0) {
+            changeFavicon()
+            alertBlaster()
         }
     }
     checkAlerts()
