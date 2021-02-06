@@ -88,11 +88,11 @@
                                         <tbody id="datos-tabla">
                                             <!--Pinta alertas en tabla proveedores--> 
                                             <% MonitorBlaster.forEach(function(record){ %>
-                                            <% if (Date.parse('01/01/2011 '+record["Delay"])>Date.parse('01/01/2011 00:05:00')) { %>
+                                            <% if (Date.parse('01/01/2011 '+record["Delay"])>Date.parse('01/01/2011 00:05:00') || record.Estatus === 'Fuera de Horario') { %>
                                             <tr style="background-color: Red; font-weight: bold; color: black; font-size: 1.3em;">
                                             <% } else if (Date.parse('01/01/2011 '+record["Delay"])>Date.parse('01/01/2011 00:01:00')) { %>
                                             <tr style="background-color: Orange; font-weight: bold; color: black; font-size: 1.3em;">
-                                            <% } else if (record["Delay"] >0 ){ %>
+                                            <% } else if (record["Delay"] >0 || record.Estatus === 'Enviando'){ %>
                                             <tr style="background-color: LightGreen; font-weight: bold; color: black; font-size: 1.3em;">
                                             <% } else {%>
                                             <tr>
