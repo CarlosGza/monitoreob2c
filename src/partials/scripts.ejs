@@ -50,6 +50,10 @@
         ordering: false,
         pageLength: 10
     });
+    $('#GridWCF').DataTable({
+        ordering: false,
+        pageLength: 10
+    });
     let audio = document.getElementById('alertAudio')
     const changeFavicon = () => {
         let favicon = document.querySelector('link[rel="icon"]')
@@ -119,6 +123,13 @@
         if (delayBlaster.length > 0) {
             changeFavicon()
             alertBlaster()
+        }
+
+        let MonitorWCF = <%- JSON.stringify(MonitorWCF) %>
+        let delayWCF = MonitorWCF.filter(el =>{ return Date.parse('01/01/2011 '+el.Delay)>Date.parse('01/01/2011 00:01:00')})
+        if (delayWCF.length > 0) {
+            changeFavicon()
+            alertMensajeria()
         }
     }
     checkAlerts()

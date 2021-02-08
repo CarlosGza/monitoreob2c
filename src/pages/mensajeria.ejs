@@ -186,6 +186,61 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Web Service</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table id="GridWCF" class="table table-striped table-bordered table-hover dataTable" role="grid">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>IdCliente</th>
+                                                <th>Cliente</th>
+                                                <th>IdUsuario</th>
+                                                <th>Usuario</th>
+                                                <th>FechaWCF</th>
+                                                <th>Pendientes</th>
+                                                <th>Delay</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="datos-tabla">
+                                            <!--Pinta alertas en tabla proveedores--> 
+                                            <% MonitorWCF.forEach(function(record){ %>
+                                            <% if (Date.parse('01/01/2011 '+record.Delay)>Date.parse('01/01/2011 00:01:00')) { %>
+                                            <tr style="background-color: Red; font-weight: bold; color: black;">
+                                            <% } else { %>
+                                            <tr style="background-color: LightGreen; font-weight: bold; color: black;">
+                                            <% } %>
+                                                <td><%= record.IdCliente %></td>
+                                                <td><%= record.Cliente %></td>
+                                                <td><%= record.IdUsuario %></td>
+                                                <td><%= record.Usuario %></td>
+                                                <td><%= record.FechaWCF.substring(0,19).replace('T',' ') %></td>
+                                                <td><%= record.Pendientes.toLocaleString('en') %></td>
+                                                <td><%= record.Delay %></td>
+                                            </tr>
+                                            <% }) %>
+
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- termina tabla-->
             
