@@ -153,12 +153,14 @@
                                             </tr>
                                         </thead>
                                         <tbody id="datos-tabla">
-                                            <!--Pinta alertas en tabla proveedores--> 
+                                            <!--Pinta alertas en tabla Migrador--> 
                                             <% MonitorNoMigrados.forEach(function(record){ %>
-                                            <% if (record.Estatus === 'Migrando' ) { %>
-                                            <tr style="background-color: LightGreen; font-weight: bold; color: black;">
+                                            <% if (record.Estatus === 'Migrando' && record.Segmentado === 'NO' && Date.parse('01/01/2011 '+record.Delay)>Date.parse('01/01/2011 00:01:00')) { %>
+                                            <tr style="background-color: orange; font-weight: bold; color: black;">
                                             <% } else if (record.Estatus === 'Fuera de Horario') { %>
                                             <tr style="background-color: Red; font-weight: bold; color: black;">
+                                            <% } else if (record.Estatus === 'Migrando') { %>
+                                            <tr style="background-color: LightGreen; font-weight: bold; color: black;">
                                             <% } else { %>
                                             <tr>
                                             <% } %>

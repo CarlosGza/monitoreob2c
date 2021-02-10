@@ -113,7 +113,7 @@
         }
 
         let MonitorNoMigrados = <%- JSON.stringify(MonitorNoMigrados) %>
-        let delayNoMigrados = MonitorNoMigrados.filter(el =>{ return el.Segmentado == 'NO' && Date.parse('01/01/2011 '+el["Delay"])>Date.parse('01/01/2011 00:05:00')})
+        let delayNoMigrados = MonitorNoMigrados.filter(el =>{ return el.Segmentado == 'NO' && Date.parse('01/01/2011 '+el["Delay"])>Date.parse('01/01/2011 00:01:00') || el.Estatus == 'Fuera de Horario'})
         if (delayNoMigrados.length > 0) {
             changeFavicon()
             alertMensajeria()
