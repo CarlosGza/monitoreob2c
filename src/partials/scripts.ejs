@@ -121,7 +121,7 @@
         let MonitorBlaster = <%- JSON.stringify(MonitorBlaster) %>
         let delayBlaster = MonitorBlaster.filter(el =>{ return Date.parse('01/01/2011 '+el["Delay"])>Date.parse('01/01/2011 00:05:00')})
         if (delayBlaster.length > 0) {
-            changeFavicon()
+            //changeFavicon()
             alertBlaster()
         }
 
