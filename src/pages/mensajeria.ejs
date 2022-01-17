@@ -150,16 +150,17 @@
                                                 <th>MLargo</th>
                                                 <th>Estatus</th>
                                                 <th>Delay</th>
+                                                <th>Revisado</th>
                                             </tr>
                                         </thead>
                                         <tbody id="datos-tabla">
                                             <!--Pinta alertas en tabla Migrador--> 
                                             <% MonitorNoMigrados.forEach(function(record){ %>
-                                            <% if (record.Estatus === 'Migrando' && record.Segmentado === 'NO' && Date.parse('01/01/2011 '+record.Delay)>Date.parse('01/01/2011 00:01:00')) { %>
+                                            <% if (record.Revisado === 0 && (record.Estatus === 'Migrando' && record.Segmentado === 'NO' && Date.parse('01/01/2011 '+record.Delay)>Date.parse('01/01/2011 00:01:00'))) { %>
                                             <tr style="background-color: orange; font-weight: bold; color: black;">
-                                            <% } else if (record.Estatus === 'Fuera de Horario') { %>
+                                            <% } else if (record.Revisado === 0 && (record.Estatus === 'Fuera de Horario')) { %>
                                             <tr style="background-color: Red; font-weight: bold; color: black;">
-                                            <% } else if (record.Estatus === 'Migrando') { %>
+                                            <% } else if (record.Revisado === 0 && (record.Estatus === 'Migrando')) { %>
                                             <tr style="background-color: LightGreen; font-weight: bold; color: black;">
                                             <% } else { %>
                                             <tr>
@@ -176,6 +177,14 @@
                                                 <td><%= record.MLargo %></td>
                                                 <td><%= record.Estatus %></td>
                                                 <td><%= record.Delay %></td>
+                                                <td style="display:flex; justify-content: center;">
+                                                    <input type="checkbox" value="<%= record.idenviopr %>" 
+                                                    onclick="actualizaRevisadoMigradorSMS(event)"
+                                                    <% if(record.Revisado === 1){%>
+                                                    checked
+                                                    <% } %>
+                                                    >
+                                                </td>
                                             </tr>
                                             <% }) %>
 

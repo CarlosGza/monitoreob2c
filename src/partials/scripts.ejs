@@ -4,6 +4,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
 
@@ -119,7 +120,7 @@
             alertMensajeria()
         }
         let MonitorBlaster = <%- JSON.stringify(MonitorBlaster) %>
-        let delayBlaster = MonitorBlaster.filter(el =>{ return Date.parse('01/01/2011 '+el["Delay"])>Date.parse('01/01/2011 00:05:00')})
+        let delayBlaster = MonitorBlaster.filter(el =>{ return el.Revisado === 0 && Date.parse('01/01/2011 '+el["Delay"])>Date.parse('01/01/2011 00:05:00')})
         if (delayBlaster.length > 0) {
             //changeFavicon()
             alertBlaster()
@@ -144,5 +145,69 @@
         refresh ? document.getElementById('actualizacion').innerText = ultimaActualizacion : document.getElementById('actualizacion').innerText = 'Detenido'
         //console.log(refresh)
     })
+
+    // ejecuta en /Tracking
+    if(window.location.pathname === '/Tracking'){
+        refresh = false
+        let trackingSearchBtn = document.getElementById('tracking_search_btn')
+        let trackingSearchInput = document.getElementById('tracking_search_input')
+        const refreshTracking = (data) => {
+            // document.getElementById('tracking_data').innerHTML = ''
+            // document.getElementById('loader').style.display = 'flex'
+            
+            data.map(record=>{
+                document.getElementById('tracking_data').innerHTML += `
+                <tr>
+                    <td>${record.Telefono}</td>
+                    <td>${record.Mensaje}</td>
+                    <td>${record.FechaWS !== null ? record.FechaWS.substring(0,19).replace('T',' ') : ''}</td>
+                    <td>${record.FechaInicial.substring(0,19).replace('T',' ')}</td>
+                    <td>${record.FechaMigrado.substring(0,19).replace('T',' ')}</td>
+                    <td>${record.FechaEnviado.substring(0,19).replace('T',' ')}</td>
+                    <td>${record.Resultado}</td>
+                    <td>${record.RespuestaProveedor}</td>
+                    <td>${record.Carrier}</td>
+                    <td>${record.Delay}</td>
+                </tr>
+                `
+            })
+        }
+        const trackingSearch = async () =>{
+            let telefono = trackingSearchInput.value
+            try {
+                document.getElementById('tracking_data').innerHTML = ''
+                document.getElementById('loader').style.display = 'flex'
+                let response = await axios.post('http://localhost:3000/getTracking',{telefono})
+                refreshTracking(response.data)
+                document.getElementById('loader').style.display = 'none'
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        
+        trackingSearchBtn.addEventListener('click',()=>{trackingSearch()})
+        trackingSearchInput.addEventListener('keyup',(e)=>{
+            if(e.key === 'Enter'){
+                trackingSearch()
+            }
+        })
+        $('[data-toggle="tooltip"]').tooltip()
+    }
+    
+    const actualizaRevisadoBlaster = async (event) => {
+        try {
+            let response = await axios.post('http://localhost:3000/updRevisadoBlaster',{idenviopr: event.target.value, revisado: event.target.checked})
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const actualizaRevisadoMigradorSMS = async (event) => {
+        try {
+            let response = await axios.post('http://localhost:3000/updRevisadoMigrador',{idenviopr: event.target.value, revisado: event.target.checked})
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
 </script>

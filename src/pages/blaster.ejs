@@ -83,23 +83,25 @@
                                                 <th>Hora Fin</th>
                                                 <th>Delay</th>
                                                 <th>Estatus</th>
+                                                <th>Revisado</th>
                                             </tr>
                                         </thead>
                                         <tbody id="datos-tabla">
                                             <!--Pinta alertas en tabla proveedores--> 
                                             <% MonitorBlaster.forEach(function(record){ %>
-                                            <% if (Date.parse('01/01/2011 '+record["Delay"])>Date.parse('01/01/2011 00:05:00') || record.Estatus === 'Fuera de Horario') { %>
+                                            <% if (record.Revisado === 0 && (Date.parse('01/01/2011 '+record["Delay"])>Date.parse('01/01/2011 00:05:00') || record.Estatus === 'Fuera de Horario')) { %>
                                             <tr style="background-color: Red; font-weight: bold; color: black; font-size: 1.3em;">
-                                            <% } else if (Date.parse('01/01/2011 '+record["Delay"])>Date.parse('01/01/2011 00:01:00')) { %>
+                                            <% } else if (record.Revisado === 0 && (Date.parse('01/01/2011 '+record["Delay"])>Date.parse('01/01/2011 00:01:00'))) { %>
                                             <tr style="background-color: Orange; font-weight: bold; color: black; font-size: 1.3em;">
-                                            <% } else if (record["Delay"] >0 || record.Estatus === 'Enviando'){ %>
+                                            <% } else if (record.Revisado === 0 && (record["Delay"] >0 || record.Estatus === 'Enviando')){ %>
                                             <tr style="background-color: LightGreen; font-weight: bold; color: black; font-size: 1.3em;">
                                             <% } else {%>
                                             <tr>
                                             <% } %>
                                                 <td >
                                                     <a style="color: black" href="https://tink.marcatel.com.mx/Catalogos/wfAEnviosEdicionBlaster.aspx?IdEnvioPr=<%= record.IdEnvioPr%>&A=E" target="_blank">
-                                                        <%= record.IdEnvioPr %></a></td>
+                                                        <%= record.IdEnvioPr %></a>
+                                                </td>
                                                 <td><%= record.Cliente %></td>
                                                 <td><%= record.Total.toLocaleString('en') %></td>
                                                 <td><%= record.SinProcesar.toLocaleString('en') %></td>
@@ -112,6 +114,14 @@
                                                 <td><%= record.HoraFin %></td>
                                                 <td><%= record.Delay %></td>
                                                 <td><%= record.Estatus %></td>
+                                                <td style="display:flex; justify-content: center;">
+                                                    <input type="checkbox" value="<%= record.IdEnvioPr %>" 
+                                                    onclick="actualizaRevisadoBlaster(event)"
+                                                    <% if(record.Revisado === 1){%>
+                                                    checked
+                                                    <% } %>
+                                                    >
+                                                </td>
                                             </tr>
                                             <% }) %>
 

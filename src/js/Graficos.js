@@ -104,6 +104,31 @@ var configProveedores = {
 		legend: {
 			position: 'right',
 		},
+		scales: {
+			yAxes: [
+				{
+					// stacked: true,
+					ticks: {
+						callback: function (value, index, values) {
+							return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+						},
+					},
+				},
+			],
+		},
+		tooltips: {
+			// mode: 'index',
+			// intersect: false,
+			callbacks: {
+				label: function (tooltipItem, data) {
+					return (
+						data.datasets[tooltipItem.datasetIndex].label +
+						': ' +
+						tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+					)
+				},
+			},
+		},
 	},
 }
 
@@ -140,6 +165,7 @@ var configProveedor = {
 			fontFamily: 'sans-serif',
 			fontSize: 20,
 		},
+		
 	},
 }
 
