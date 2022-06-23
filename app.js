@@ -144,30 +144,6 @@ app.post('/updRevisadoBlaster',async function(req,res) {
 	}
 })
 
-// Route /updRevisadoMigrador
-app.post('/updRevisadoMigrador',async function(req,res) {
-	let idenviopr = req.body.idenviopr
-	let revisado = req.body.revisado ? 1 : 0
-	if(isNaN(idenviopr)) return res.send([])
-	try {
-		let results = await pool.request().query(`
-		if not exists (select top 1 1 from SMSCargas.dbo.revisionalertas with(nolock) where idenviopr=${idenviopr})
-			begin
-				insert into SMSCargas.dbo.revisionalertas select ${idenviopr},${revisado},GETDATE()
-			end
-		else
-			begin
-				update SMSCargas.dbo.revisionalertas set Revisado = ${revisado},Fecha = GETDATE() where IdEnvioPr = ${idenviopr}
-			end
-		`)
-		// console.log(results)
-		res.send(results)
-	} catch (err) {
-		// console.log(err)
-		res.send([])
-	}
-})
-
 app.get('*', (req, res) => {
 	res.status(300).json('No existe esta ruta... Contacta a JC')
 })
