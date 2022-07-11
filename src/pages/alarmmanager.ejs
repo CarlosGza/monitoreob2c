@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <% include ../partials/head %>
+   
+    
+
+</head>
+<body class="mini-navbar">
+
+    <div id="wrapper">
+        <% include ../partials/nav-izq %>
+        <div id="page-wrapper" class="gray-bg">
+            <% include ../partials/nav-top %>
+            
+            <!--inicia tabla-->
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <!-- Etiquetas -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Alarmas Operativas</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div>
+                                        
+                                        <div class="tabs-container">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#tab-1">Operadora SMS</a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-2">Proveedor</a></li>
+                                                <li class=""><a data-toggle="tab" href="#tab-3">Cliente VIP</a></li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <!-- TAB1 -->
+                                                <div id="tab-1" class="tab-pane active">
+                                                    <div class="panel-body">
+                                                        <button type="button" id="btnNuevo" class="btn btn-w-m btn-primary" data-toggle="modal" data-target="#myModal1">
+                                                            Nuevo
+                                                        </button>
+                                                        <div class="table-responsive">
+                                                            <table id="GridAlarmas1" class="table table-striped table-bordered table-hover dataTable" role="grid">
+                                                                <thead class="thead-dark">
+                                                                    <tr>
+                                                                        <th style="display:none">IdAlerta</th>
+                                                                        <th style="display:none">Sección</th>
+                                                                        <th>Nivel</th>
+                                                                        <th>VíaEnvío</th>
+                                                                        <th>%Error</th>
+                                                                        <th>Período de Tiempo</th>
+                                                                        <th>Carriers</th>
+                                                                        <th style="width: 100px;"></th>
+                                                                        <th style="width: 100px;"></th>
+                                                                                                                                                
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="datos-tabla1">
+                                                                    
+                        
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+
+                                                        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog" >
+                                                                
+                                                                <div class="modal-content animated fadeIn">
+                                                                    
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title" style="display: block; padding-left: 17px;text-align: left;" > Alerta | Carriers</h4>
+                                                                        
+                                                                    </div>
+                                                                    
+                                                                    <div class="modal-body">
+                                                                        
+                                                                        <form class="form-horizontal">
+                                                                           
+                                                                            <input type="hidden" id="IdAlerta1" name="IdAlerta" />
+                                                                            <input type="hidden" id="Seccion1" name="Seccion" />
+                                                                            <div class="form-group">
+                                                                                <label>Nivel: </label> 
+                                                                                <select class="form-control" id="Nivel1" name="Nivel1">
+                                                                                    <option>1</option>
+                                                                                    <option>2</option>
+                                                                                    <option>3</option>
+                                                                                    <option>4</option>
+                                                                                    <option>5</option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Vía de Envío: </label> 
+                                                                                <select class="form-control" id="ViaEnvio1" name="ViaEnvio1">
+                                                                                    <option value="1" >EMAIL</option>
+                                                                                    <option value="2" >SMS</option>
+                                                                                    <option value="3" >BLASTER</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Destinatarios: </label><br>
+                                                                                <input class="tagsinput form-control"  id="Destinatarios1"  type="text" />
+                                                                            </div>
+                                                                            
+                                                                            <div class="form-group">
+                                                                                <label>Mensaje: </label>
+                                                                                <textarea class="form-control" id="Mensaje1" rows="3"></textarea>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Porcentaje de Error: </label> 
+                                                                                <input type="text" class="js-range-slider" Id="PError1"  />
+
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Periodo de Tiempo: </label> 
+                                                                                <input type="text" class="js-range-slider" Id="PTiempo1" name="PTiempo1" value="" />
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Carriers: </label> 
+                                                                                <select class="chosen-select form-control"  multiple data-placeholder="Seleccione..." id="Carriers1" name="Carriers1">
+                                                                                    <option value="Telcel" >Telcel</option>
+                                                                                    <option value="Movistar" >Movistar</option>
+                                                                                    <option value="AT&T" >AT&T</option>
+                                                                                    <option value="Otros" >Otros</option>
+                                                                                </select> 
+                                                                            </div>  
+
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" id="btnCancelar" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                                                        <button type="button" id="btnGuardar"   class="btn btn-primary">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- TAB2 -->
+                                                <div id="tab-2" class="tab-pane ">
+                                                    <div class="panel-body">
+                                                        <button type="button" id="btnNuevo2" class="btn btn-w-m btn-primary" data-toggle="modal" data-target="#myModal2">Nuevo</button>
+                                                        <div class="table-responsive">
+                                                            <table id="GridAlarmas1" class="table table-striped table-bordered table-hover dataTable" role="grid">
+                                                                <thead class="thead-dark">
+                                                                    <tr>
+                                                                        <th style="display:none">IdAlerta</th>
+                                                                        <th style="display:none">Seccion</th>
+                                                                        <th>Nivel</th>
+                                                                        <th>VíaEnvío</th>
+                                                                        <th>% Error</th>
+                                                                        <th>Período de Tiempo</th>
+                                                                        <th style="width: 100px;"></th>
+                                                                        <th style="width: 100px;"></th>
+                                                                                                                                                
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="datos-tabla2">
+                                                                   
+                        
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+                                                    
+                                                        <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog" >
+                                                                
+                                                                <div class="modal-content animated fadeIn">
+                                                                    
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title"   style="display: block; padding-left: 17px;text-align: left;"> Alerta | Proveedor-Etiqueta</h4>
+                                                                        
+                                                                    </div>
+                                                                    
+                                                                    <div class="modal-body">
+                                                                        
+                                                                        <form class="form-horizontal">
+                                                                           
+                                                                            <input type="hidden" id="IdAlerta2" name="IdAlerta2" />
+                                                                            <input type="hidden" id="Seccion2" name="Seccion2" />
+                                                                            <div class="form-group">
+                                                                                <label>Nivel: </label> 
+                                                                                <select class="form-control" id="Nivel2" name="Nivel2">
+                                                                                    <option>1</option>
+                                                                                    <option>2</option>
+                                                                                    <option>3</option>
+                                                                                    <option>4</option>
+                                                                                    <option>5</option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Vía de Envío: </label> 
+                                                                                <select class="form-control" id="ViaEnvio2" name="ViaEnvio2">
+                                                                                    <option value="1" >EMAIL</option>
+                                                                                    <option value="2" >SMS</option>
+                                                                                    <option value="3" >BLASTER</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Destinatarios: </label><br>
+                                                                                <input class="tagsinput form-control"  id="Destinatarios2"  type="text" />
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Mensaje: </label>
+                                                                                <textarea class="form-control" id="Mensaje2" rows="3"></textarea>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Porcentaje de Error: </label> 
+                                                                                <input type="text" class="js-range-slider" Id="PError2"  />
+
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Periodo de Tiempo: </label> 
+                                                                                <input type="text" class="js-range-slider" Id="PTiempo2" name="PTiempo2" value="" />
+
+                                                                            </div>  
+                                                                            <div class="form-group">
+                                                                                <label>Compañia Proveedor : </label> 
+                                                                                <select class="chosen-select form-control" multiple data-placeholder="Seleccione..." id = "ProveedoresInterno2" name = "ProveedoresInterno2">                                                                                    
+                                                                                </select>
+                                                                           </div>
+                                                                            <div class="form-group">
+                                                                            <label>Proveedor: </label> 
+                                                                            <select class="chosen-select form-control" multiple data-placeholder="Seleccione..." id = "Proveedores2" name = "Proveedores2">                                                                                    
+                                                                            </select>
+                                                                            </div>    
+                                                                            <div class="form-group">
+                                                                                <label>Etiquetas: </label> 
+                                                                                <select class="chosen-select form-control" multiple data-placeholder="Seleccione..." id = "Etiquetas2" name = "Etiquetas2">                                                                                    
+                                                                                </select>
+                                                                                </div>    
+                                                                            <div class="form-group" style="display: none;">
+                                                                                <label>Carriers: </label> 
+                                                                                <select class="chosen-select form-control"  multiple data-placeholder="Seleccione..." id="Carriers2" name="Carriers2">
+                                                                                    <option value="Telcel" >Telcel</option>
+                                                                                    <option value="Movistar" >Movistar</option>
+                                                                                    <option value="AT&T" >AT&T</option>
+                                                                                    <option value="Otros" >Otros</option>
+                                                                                </select>                                                                              
+
+                                                                            </div>  
+
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" id="btnCancelar2" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                                                        <button type="button" id="btnGuardar2"   class="btn btn-primary">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                        <!-- Fin del modal2 -->
+
+                                                    </div>
+                                                </div>
+                                                <div id="tab-3" class="tab-pane ">
+                                                    <div class="panel-body">
+                                                        <button type="button" id="btnNuevo3" class="btn btn-w-m btn-primary" data-toggle="modal" data-target="#myModal3">Nuevo</button>
+                                                        <div class="table-responsive">
+                                                            <table id="GridAlarmas1" class="table table-striped table-bordered table-hover dataTable" role="grid">
+                                                                <thead class="thead-dark">
+                                                                    <tr>
+                                                                        <th style="display:none">IdAlerta</th>
+                                                                        <th style="display:none">Seccion</th>
+                                                                        <th>Nivel</th>
+                                                                        <th>VíaEnvío</th>
+                                                                        <th>PError</th>
+                                                                        <th>PeriodoT</th>
+                                                                        <th style="width: 100px;"></th>
+                                                                        <th style="width: 100px;"></th>
+                                                                                                                                                
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="datos-tabla3">
+                                                                    <td style="display:none">3</td>
+                                                                    <td style="display:none">3</td>
+                                                                    <td>1</td>
+                                                                    <td>1</td>
+                                                                    <td>2</td>
+                                                                    <td>2</td>
+                                                                    <td><button type="button" id="btnEditar" class="btn btn-w-m btn-success">Editar</button></td>
+                                                                    <td><button type="button" id="btnBorrar" class="btn btn-w-m btn-danger" >Borrar</button></td>
+                        
+                                                                </tbody>
+                                                            </table>
+                                                            
+                                                        </div>
+
+                                                        <div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog" >
+                                                                
+                                                                <div class="modal-content animated fadeIn">
+                                                                    
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title"  style="display: block; padding-left: 17px;text-align: left;" > Alerta | Clientes VIP</h4>
+                                                                        
+                                                                    </div>
+                                                                    
+                                                                    <div class="modal-body">
+                                                                        
+                                                                        <form class="form-horizontal">
+                                                                           
+                                                                            <input type="hidden" id="IdAlerta3" name="IdAlerta3" />
+                                                                            <input type="hidden" id="Seccion3" name="Seccion3" />
+                                                                            <div class="form-group">
+                                                                                <label>Nivel: </label> 
+                                                                                <select class="form-control" id="Nivel3" name="Nivel3">
+                                                                                    <option>1</option>
+                                                                                    <option>2</option>
+                                                                                    <option>3</option>
+                                                                                    <option>4</option>
+                                                                                    <option>5</option>
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Vía de Envío: </label> 
+                                                                                <select class="form-control" id="ViaEnvio3" name="ViaEnvio3">
+                                                                                    <option value="1" >EMAIL</option>
+                                                                                    <option value="2" >SMS</option>
+                                                                                    <option value="3" >BLASTER</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Destinatarios: </label><br>
+                                                                                <input class="tagsinput form-control"  id="Destinatarios3"  type="text" />
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Mensaje: </label>
+                                                                                <textarea class="form-control" id="Mensaje3" rows="3"></textarea>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Porcentaje de Error: </label> 
+                                                                                <input type="text" class="js-range-slider" Id="PError3"  />
+
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label>Periodo de Tiempo: </label> 
+                                                                                <input type="text" class="js-range-slider" Id="PTiempo3" name="PTiempo3" value="" />
+
+                                                                            </div>  
+                                                                            
+                                                                            <div class="form-group" >
+                                                                                <label>Clientes VIP: </label>
+                                                                                <select class="chosen-select form-control"  multiple data-placeholder="Seleccione..." id="ClientesVIP3" name="ClientesVIP3">
+                                                                                </select>
+                                                                            </div>
+
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" id="btnCancelar3" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                                                        <button type="button" id="btnGuardar3"   class="btn btn-primary">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+
+
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                
+                                
+                                        </div>
+                                    </div>
+                                
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- termina tabla-->
+            
+            <% include ../partials/footer %>
+        </div>
+    </div>
+    <% include ../partials/scriptAlarms %>
+    
+    
+</body>
+</html>

@@ -1,0 +1,1115 @@
+<!-- Mainly scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<script src="js/plugins/dataTables/datatables.min.js"></script>
+<!-- Sliders-->
+<script src="js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+ <!-- Tags Input -->
+<script src="js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+ <!-- SUMMERNOTE -->
+<script src="js/plugins/summernote/summernote.min.js"></script>
+   <!-- Chosen -->
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<!-- Select2 -->
+<script src="js/plugins/select2/select2.full.min.js"></script>
+<!-- sweetalert -->
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+
+            window.onresize = function(event) {
+
+                var tab = $('li.active a')[0].getAttribute("href")
+                var Seccion = tab.substring(tab.length,tab.length - 1)
+
+                let PErrorW   = $('#PError'+Seccion).val()
+                let PTiempoW  = $('#PTiempo'+Seccion).val()
+              //  swal({title: "Aviso",text: "Se modifica el tamaño de la ventana. Los valores son: %Error "+ PErrorW + " Tiempo: " + PTiempoW });
+
+                $("#PError"+Seccion).ionRangeSlider("remove");
+                $("#PTiempo"+Seccion).ionRangeSlider("remove");
+                
+                $("#PError"+Seccion).ionRangeSlider({
+                min: 0,
+                max: 100,
+                type: 'single',
+                step: 5,
+                from: PErrorW,
+                postfix: " %",
+                prettify: false,
+                hasGrid: true
+                });
+                $("#PTiempo"+Seccion).ionRangeSlider({
+                //color: 'primary',
+                grid: true,
+                min: 0,
+                max: 360,
+                step: 5,
+                from: PTiempoW,        
+                postfix: " Minutos",
+                hasGrid: true
+                });
+
+
+
+            };
+
+            
+            $('.chosen-select').chosen({width: "100%"});
+
+            $('#Mensaje1').summernote({height: 155,
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['height', ['height']]
+                ]
+                });
+
+            $('#Mensaje2').summernote({height: 155,
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['height', ['height']]
+            ]
+            });
+
+            $('#Mensaje3').summernote({height: 155,
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['height', ['height']]
+            ]
+            });
+            
+            $('.tagsinput').tagsinput({
+                tagClass: 'label label-primary'
+            });
+
+            $("#PError1").ionRangeSlider({
+                min: 0,
+            max: 100,
+            type: 'single',
+            step: 5,
+            from: 10,
+            postfix: " %",
+            prettify: false,
+            hasGrid: true
+            });
+
+            $("#PTiempo1").ionRangeSlider({
+            //color: 'primary',
+            grid: true,
+            min: 0,
+            max: 360,
+            step: 5,
+            from: 60,        
+            postfix: " Minutos",
+            hasGrid: true
+            });
+
+            //Tab 2 ///////////////
+            $("#PError2").ionRangeSlider({
+                min: 0,
+            max: 100,
+            type: 'single',
+            step: 5,
+            from: 10,
+            postfix: " %",
+            prettify: false,
+            hasGrid: true
+            });
+
+            $("#PTiempo2").ionRangeSlider({
+            //color: 'primary',
+            grid: true,
+            min: 0,
+            max: 360,
+            step: 5,
+            from: 60,        
+            postfix: " Minutos",
+            hasGrid: true
+            });
+
+
+            //Tab 3 ///////////////
+            $("#PError3").ionRangeSlider({
+                min: 0,
+            max: 100,
+            type: 'single',
+            step: 5,
+            from: 10,
+            postfix: " %",
+            prettify: false,
+            hasGrid: true
+            });
+
+            $("#PTiempo3").ionRangeSlider({
+            //color: 'primary',
+            grid: true,
+            min: 0,
+            max: 360,
+            step: 5,
+            from: 60,        
+            postfix: " Minutos",
+            hasGrid: true
+            });
+
+            ///////////////
+
+            $('#myModal1').on('shown.bs.modal', function (e) {
+             $("#PTiempo1").ionRangeSlider("update");
+             $("#PError1").ionRangeSlider("update");
+
+              })
+
+            
+            $('#myModal2').on('shown.bs.modal', function (e) {
+            $("#PTiempo2").ionRangeSlider("update");
+            $("#PError2").ionRangeSlider("update"); 
+
+            })
+
+            $('#myModal3').on('shown.bs.modal', function (e) {
+            $("#PTiempo3").ionRangeSlider("update");
+            $("#PError3").ionRangeSlider("update"); 
+
+            })
+
+
+        });
+
+
+        ///////Eventos //////////
+        $('#btnNuevo').click(function () {
+
+          let Seccion = 1
+          ReiniciarControles()
+          $("#PError"+Seccion).ionRangeSlider("remove");
+          $("#PError"+Seccion).ionRangeSlider({
+                min: 0,
+            max: 100,
+            type: 'single',
+            step: 5,
+            from: 10,
+            postfix: " %",
+            prettify: false,
+            hasGrid: true
+            });
+
+          $("#PTiempo"+Seccion).ionRangeSlider("remove");
+          $("#PTiempo"+Seccion).ionRangeSlider({
+            //color: 'primary',
+            grid: true,
+            min: 0,
+            max: 360,
+            step: 5,
+            from: 60,        
+            postfix: " Minutos",
+            hasGrid: true
+            });
+ 
+        } );
+
+        $('#btnNuevo2').click(function () {
+         let Seccion = 2
+         ReiniciarControles()
+         $("#PError"+Seccion).ionRangeSlider("remove");
+          $("#PError"+Seccion).ionRangeSlider({
+                min: 0,
+            max: 100,
+            type: 'single',
+            step: 5,
+            from: 10,
+            postfix: " %",
+            prettify: false,
+            hasGrid: true
+            });
+
+          $("#PTiempo"+Seccion).ionRangeSlider("remove");
+          $("#PTiempo"+Seccion).ionRangeSlider({
+            //color: 'primary',
+            grid: true,
+            min: 0,
+            max: 360,
+            step: 5,
+            from: 60,        
+            postfix: " Minutos",
+            hasGrid: true
+            });
+
+         } );
+
+         $('#btnNuevo3').click(function () {
+         let Seccion = 3
+         ReiniciarControles()
+         $("#PError"+Seccion).ionRangeSlider("remove");
+          $("#PError"+Seccion).ionRangeSlider({
+                min: 0,
+            max: 100,
+            type: 'single',
+            step: 5,
+            from: 10,
+            postfix: " %",
+            prettify: false,
+            hasGrid: true
+            });
+
+          $("#PTiempo"+Seccion).ionRangeSlider("remove");
+          $("#PTiempo"+Seccion).ionRangeSlider({
+            //color: 'primary',
+            grid: true,
+            min: 0,
+            max: 360,
+            step: 5,
+            from: 60,        
+            postfix: " Minutos",
+            hasGrid: true
+            });
+
+         } );
+
+        $('#btnGuardar').click(function () {
+          let Seccion = 1
+          if ($("#Carriers1").val() == 0)
+          {
+            swal({title: "Aviso",text: "Necesita incluir un carriers al menos."});
+          }else if ($("#Destinatarios1").val() == 0)
+           {
+            swal({title: "Aviso",text: "Necesita incluir un destinatario al menos."});
+           }else if ($("#Mensaje1").val() == 0)
+                {
+                    swal({title: "Aviso",text: "Necesita incluir un mensaje a la alerta."});                    
+                }else
+                {
+                    updAlarm(Seccion);
+                }
+          
+
+        } );
+
+        $('#btnGuardar2').click(function () {
+          let Seccion = 2
+          updAlarm(Seccion);
+
+        } );
+
+        $('#btnGuardar3').click(function () {
+          let Seccion = 3
+          updAlarm(Seccion);
+
+        } );
+
+      
+        $('#ViaEnvio1').on('change', function() {
+             
+             $("#Destinatarios1").tagsinput('removeAll');
+             
+             if(this.value != 1 )
+             {
+                $('#Mensaje1').summernote('destroy');
+                $('#Mensaje1').val('');
+             }
+             else
+             {
+                $('#Mensaje1').summernote({height: 155,
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['height', ['height']]
+                ]
+                });
+                $('#Mensaje1').summernote('code');
+
+             }
+
+        });
+
+        $('#ViaEnvio2').on('change', function() {
+             
+             $("#Destinatarios2").tagsinput('removeAll');
+             
+             if(this.value != 1 )
+             {
+                $('#Mensaje2').summernote('destroy');
+                $('#Mensaje2').val('');
+             }
+             else
+             {
+                $('#Mensaje2').summernote({height: 155,
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['height', ['height']]
+                ]
+                });
+                $('#Mensaje2').summernote('code');
+
+             }
+
+        });
+
+        $('#ViaEnvio3').on('change', function() {
+             
+             $("#Destinatarios3").tagsinput('removeAll');
+             
+             if(this.value != 1 )
+             {
+                $('#Mensaje3').summernote('destroy');
+                $('#Mensaje3').val('');
+             }
+             else
+             {
+                $('#Mensaje3').summernote({height: 155,
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['height', ['height']]
+                ]
+                });
+                $('#Mensaje3').summernote('code');
+
+             }
+
+        });
+
+        $('#ProveedoresInterno2').on('change', function() {
+             
+             $("#Proveedores2").val('').trigger("chosen:updated");
+             $("#Proveedores2").innerHTML = ''
+ 
+             $("#Etiquetas2").val('').trigger("chosen:updated");
+             $("#Etiquetas2").innerHTML = ''
+ 
+ 
+             let CompaniasProv = $("#ProveedoresInterno2").val()
+             CompaniasProv = "'"+CompaniasProv.join('\',\'')+"'"
+             TraerProveedores(CompaniasProv)
+ 
+ 
+         });
+
+        $('#Proveedores2').on('change', function() {
+             
+            document.querySelector('Select#Etiquetas2').innerHTML = ''
+             $("#Etiquetas2").val('').trigger("chosen:updated");
+             
+  
+             let Prov = $("#Proveedores2").val()
+             Prov = "'"+Prov.join('\',\'')+"'"
+             TraerEtiquetas(Prov) 
+ 
+        });
+
+        $('#Etiquetas2').on('change', function() {
+             
+                         
+              let Prov = $("#Etiquetas2").val()
+              //Prov = "'"+Prov.join('\',\'')+"'"
+              Prov.forEach(revisar, this)
+             
+              
+              
+  
+         });
+
+         function revisar(item, index, Prov)
+         {
+            let tags = $('#Etiquetas2_chosen > ul')[0].innerText
+            let Todas = tags.substring(tags.length, tags.length-7)
+
+            if (Todas != '-Todas-' )
+                {
+                    if (Prov[0] == 0)
+                    {  Prov.splice(0,1)
+                     $("#Etiquetas2").val(Prov).trigger("chosen:updated");
+                    }
+                }
+            else
+                {
+                    if (item == '0')
+                    {                
+                        Prov.splice(1,Prov.length-1) 
+                        $("#Etiquetas2").val(Prov).trigger("chosen:updated");                        
+                    }
+                }
+         }
+
+       
+        $("#Destinatarios1").on('beforeItemAdd', function(event) {
+
+        var ViaEnvio = $('#ViaEnvio1').val();
+        var texto = ""
+            texto = event.item
+
+                if (ViaEnvio == '1')
+                {
+                        
+
+                    if (ValidarEmail(texto))
+                    {
+                        
+                        //alert("agregado con exito")
+                        
+                    }else
+                    {
+                        event.cancel = true
+                    }
+            }
+            else
+            {
+                if (isNaN(texto) || texto.length != 10) 
+                {
+                    event.cancel = true
+                }
+                else
+                {
+                    
+                }         
+            }       
+        // event.item: contiene el item
+        // event.cancel: true sino quieres que se agregue
+        });
+
+        $("#Destinatarios2").on('beforeItemAdd', function(event) {
+
+        var ViaEnvio = $('#ViaEnvio2').val();
+        var texto = ""
+            texto = event.item
+
+        if (ViaEnvio == '1')
+        {
+                
+
+            if (ValidarEmail(texto))
+            {
+                
+                //alert("agregado con exito")
+                
+            }else
+            {
+                event.cancel = true
+            }
+    }
+    else
+    {
+        if (isNaN(texto) || texto.length != 10) 
+        {
+            event.cancel = true
+        }
+        else
+        {
+            
+        }         
+    }       
+// event.item: contiene el item
+// event.cancel: true sino quieres que se agregue
+});
+
+
+$("#Destinatarios3").on('beforeItemAdd', function(event) {
+
+var ViaEnvio = $('#ViaEnvio3').val();
+var texto = ""
+    texto = event.item
+
+        if (ViaEnvio == '1')
+        {
+                
+
+            if (ValidarEmail(texto))
+            {
+                
+                //alert("agregado con exito")
+                
+            }else
+            {
+                event.cancel = true
+            }
+    }
+    else
+    {
+        if (isNaN(texto) || texto.length != 10) 
+        {
+            event.cancel = true
+        }
+        else
+        {
+            
+        }         
+    }       
+// event.item: contiene el item
+// event.cancel: true sino quieres que se agregue
+});
+
+        //Ajustes preexistentes de la plataforma de menus - No mover Atte. AB//
+            var viewportWidth = $(window).width();
+            if (viewportWidth < 600) {
+                $("body").removeClass("mini-navbar");
+            }
+            $(window).resize(function () {
+                viewportWidth = $(window).width();
+            if (viewportWidth < 600) {
+                $("body").removeClass("mini-navbar");
+            }
+            else {
+                $("body").removeClass("mini-navbar").addClass("mini-navbar");
+            }
+            });
+
+            // Visualizar primeros 25 mensajes de prueba
+            // $('#GridMensajesPrueba').DataTable({
+            //     ordering: false,
+            //     pageLength: 25
+            // });
+
+    ///////FIN DE EVENTOS///////
+
+
+    /// Funciones ///
+
+
+
+    const TraerClientes = async () =>{
+            try {
+                let response = await axios.post('http://localhost:3000/getClientes')
+                if ($("#ClientesVIP3").val().length == 0)
+                {
+               BindSelect('ClientesVIP3',response.data)  
+                }              
+
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+
+
+    const TraerEtiquetas = async (Prov, Etiquetas) =>{
+            try {
+                var response = await axios.post('http://localhost:3000/getEtiquetas',{Prov})
+                
+            }
+            finally{
+                try {
+
+                     await 
+                     //alert("Se acabo el llenado de etiquetas")
+                     
+                     BindSelect('Etiquetas2',response.data)                    
+                     $("#Etiquetas2").val(Etiquetas).trigger("chosen:updated");   
+
+                     if($("#Etiquetas2").val() == 0 && $("#Proveedores2").val() == 0)
+                     {
+                        $("#Etiquetas2 option[value='0']").remove()
+                        $("#Etiquetas2").val('').trigger("chosen:updated");
+                     }
+                     
+                    } 
+                catch (error) 
+                    { 
+                    
+                        console.log(error)          
+                    
+                    }
+
+            }
+        }    
+
+
+       
+    const TraerProveedores = async (CompaniasProv, Proveedores,Etiquetas) =>{
+            try {
+                var response = await axios.post('http://localhost:3000/getProveedores',{CompaniasProv})
+                // if ($("#Proveedores2").val().length == 0)
+                // {
+                //   BindSelect('Proveedores2',response.data)
+                // }
+            } 
+            finally{
+                try {
+
+                     await 
+                     //alert("Se acabo el llenado")
+                     
+                     BindSelect('Proveedores2',response.data)                     
+                     $("#Proveedores2").val(Proveedores).trigger("chosen:updated");
+                     let OpProv = $("#Proveedores2").val()
+                     OpProv = "'"+OpProv.join('\',\'')+"'"
+                     TraerEtiquetas(OpProv, Etiquetas) 
+                    
+                    } 
+                catch (error) 
+                    { 
+                    
+                        console.log(error)          
+                    
+                    }
+
+            }
+            
+        }    
+
+    const TraerProveedoresInterno = async () =>{
+            try {
+                let response = await axios.post('http://localhost:3000/getProveedoresInterno')
+                if ($("#ProveedoresInterno2").val().length == 0)
+                {
+               BindSelect('ProveedoresInterno2',response.data)  
+                }              
+
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+    const BindSelect = async (NombreSelect, Datos) =>{
+            try {
+                IdentificadorSelect = "Select#"+ NombreSelect
+                NombreSelect  = "#"+NombreSelect
+                let Select = document.querySelector(IdentificadorSelect)           
+                let Opciones = Datos.map(opciones)
+                let Op = Opciones.toString()
+                
+                Select.innerHTML = Op.replaceAll(',','\n')
+                $(NombreSelect).val('').trigger("chosen:updated");
+
+
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+    function opciones(item) {
+        return ["<option value='"+item.Valor+"' >"+item.Texto+"</option>"].join("\n");
+    }
+
+
+    const EliminarRegistro = async (IdAlerta) =>{
+            try {
+                let response = await axios.post('http://localhost:3000/DelAlarm',{IdAlerta})
+                
+                var Tab = $('li.active a')[0].getAttribute("href")
+                var Seccion = Tab.substring(Tab.length,Tab.length - 1)
+
+                BindTabla(Seccion)
+
+                
+
+            } catch (err) {
+                console.log(err) 
+            }
+        }
+
+    const ActualizarAlarma = async (Id,Seccion,Nivel,ViaEnvio,PError,PTiempo,Carriers,Mensaje,Destinatarios,CompaniasProv,Prov,Etiquetas,ClientesVIP) => {
+            try {
+                let response = await axios.post('http://localhost:3000/updAlarm',{IdAlerta: Id, Seccion: Seccion, Nivel: Nivel,ViaEnvio: ViaEnvio,PError: PError,PTiempo: PTiempo,Carriers: Carriers,Mensaje: Mensaje,Destinatarios: Destinatarios, CompaniasProv: CompaniasProv, Prov: Prov, Etiquetas: Etiquetas, ClientesVIP: ClientesVIP })
+            
+                if(response.data[0].Resultado == '0')
+                {
+                    swal({
+                       title: "Aviso",
+                       text: "El nivel de alerta ya existe."
+                    });
+                    
+                    throw new Error('El nivel de alerta ya existe.')
+                }
+                else
+                { 
+                    var Tab = $('li.active a')[0].getAttribute("href")
+                    var Seccion = Tab.substring(Tab.length,Tab.length - 1)
+
+                    BindTabla(Seccion)
+
+                    $('#myModal'+Seccion).modal('hide');
+                }  
+              
+
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+    function updAlarm(tab)
+{
+   let Id       = $('#IdAlerta'+tab).val()
+   let Seccion  = $('#Seccion'+tab).val()
+   let Nivel    = $('#Nivel'+tab).val()
+   let ViaEnvio = $('#ViaEnvio'+tab).val()
+   let PError   = $('#PError'+tab).val()
+   let PTiempo  = $('#PTiempo'+tab).val()   
+   let Destinatarios = $("#Destinatarios"+tab).val()
+   let Mensaje       = $("#Mensaje"+tab).val()
+       Mensaje =  Mensaje.replaceAll(`'`, `"`);
+    
+   
+  if (tab == '1')
+  {
+   var Carrier  = $("#Carriers"+tab).val()
+   var y = ''
+   Carrier.forEach(function (i) {
+       y += i + ',';
+    });
+   var Carriers = y.substring(0, y.length - 1)
+   
+   var CompaniasProv = ''
+   var Prov = ''
+   var Etiquetas = ''
+   var ClientesVIP = ''
+
+  }
+  else if(tab == '2')
+  {
+    var Carriers = ''
+
+    var CompaniasProv = $("#ProveedoresInterno"+tab).val()
+    CompaniaProv = ajusteSQL(CompaniasProv);
+   
+    var Prov = $("#Proveedores"+tab).val()
+    Prov = ajusteSQL(Prov);
+
+    var Etiquetas = $("#Etiquetas"+tab).val()
+    Etiquetas = ajusteSQL(Etiquetas);
+
+    var ClientesVIP = '4'
+
+  }
+  else if(tab == '3')
+  {
+   var Carriers = ''   
+   var CompaniasProv = ''
+   var Prov = ''
+   var Etiquetas = ''
+   var ClientesVIP = $("#ClientesVIP"+tab).val()
+
+  }
+   
+       try {
+             var Resultado = ActualizarAlarma(Id,Seccion,Nivel,ViaEnvio,PError,PTiempo,Carriers,Mensaje,Destinatarios,CompaniasProv,Prov,Etiquetas,ClientesVIP)                
+           }
+       catch (err) {
+                     alert("Excepción al actualizar la alerta, pruebe otra vez. Si continua la excepción consulte con el administrador del sistema ")
+                   }
+        finally
+            {
+                try {
+                       Resultado
+
+                     
+                     
+                    } 
+                catch (error)
+                    { 
+                       console.log(error)
+                    }
+
+            }
+
+}
+
+function ajusteSQL(Opciones)
+   {
+    var y = ''
+    Opciones.forEach(function (i) {
+       y += i + ',';
+    });
+   var Opciones = y.substring(0, y.length - 1)
+   
+   return Opciones
+
+   }
+
+
+    function EditarAlarma(IdAlerta,Seccion)
+    {
+        
+        BindEditar(IdAlerta,Seccion);     
+
+    }
+
+    function DelAlarm(IdAlerta)
+    {
+        
+        EliminarRegistro(IdAlerta)
+             
+
+    }
+
+    const BindEditar = async (IdAlerta,Seccion) =>{
+            try {
+                let response = await axios.post('http://localhost:3000/getAlertasbyid',{IdAlerta})
+                TraerAlarmasbyId(response.data, Seccion)
+
+                $('#myModal'+Seccion).modal({backdrop: 'static'},'Editar'
+                              
+                
+                );
+
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        
+    const TraerAlarmasbyId = (data, Seccion) => {
+        
+        ReiniciarControles()
+        
+
+        
+        
+        data.map(record => {
+            $("#PError"+Seccion).ionRangeSlider("remove");
+            $("#PTiempo"+Seccion).ionRangeSlider("remove");
+            
+            $("#PError"+Seccion).ionRangeSlider({
+            min: 0,
+            max: 100,
+            type: 'single',
+            step: 5,
+            from: record.PError,
+            postfix: " %",
+            prettify: false,
+            hasGrid: true
+            });
+            $("#PTiempo"+Seccion).ionRangeSlider({
+            //color: 'primary',
+            grid: true,
+            min: 0,
+            max: 360,
+            step: 5,
+            from: record.PeriodoT,        
+            postfix: " Minutos",
+            hasGrid: true
+            });
+
+            $('#IdAlerta'+Seccion).val(record.IdAlerta)
+            $('#Seccion'+Seccion).val(record.Seccion)
+            $('#Nivel'+Seccion).val(record.Nivel)
+            $('#ViaEnvio'+Seccion).val(record.ViaEnvio)
+            $('#Mensaje'+Seccion).summernote('code', record.Mensaje)
+
+            if ($('#ViaEnvio'+Seccion).val() != '1')
+            {
+                $('#Mensaje'+Seccion).summernote('destroy')
+            }
+
+            $("#Destinatarios"+Seccion).tagsinput('add', record.Destinatarios);
+
+            if(Seccion == 1)//Carriers
+            {
+            var Carriers = record.Carriers;
+            var Carriers = Carriers.split(',');
+            $("#Carriers"+Seccion).val(Carriers).trigger("chosen:updated");
+            }
+            else if(Seccion == 2)//Proveedores-Etiquetas
+            {
+                var CompaniasProv = record.ProvCompania;
+                    CompaniasProv = CompaniasProv.split(',');
+                $("#ProveedoresInterno"+Seccion).val(CompaniasProv).trigger("chosen:updated");
+               
+                /////
+
+                $("#Proveedores2").val('').trigger("chosen:updated");
+                $("#Proveedores2").innerHTML = ''
+
+                $("#Etiquetas2").val('').trigger("chosen:updated");
+                $("#Etiquetas2").innerHTML = ''
+
+
+                let OpCompania = $("#ProveedoresInterno2").val()
+                OpCompania = "'"+OpCompania.join('\',\'')+"'"               
+
+                var Prov = record.Proveedores;
+                    Prov = Prov.split(',');
+
+                var Etiquetas = record.Etiquetas;
+                Etiquetas = Etiquetas.split(',');
+            
+
+
+                TraerProveedores(OpCompania,Prov,Etiquetas)          
+                             
+
+            }
+            else if(Seccion == 3)//ClientesVIP
+            {
+                var ClientesVIP = record.ClientesVIP;
+                 var ClientesVIP = ClientesVIP.split(',');
+                $("#ClientesVIP"+Seccion).val(ClientesVIP).trigger("chosen:updated");
+
+            }
+
+      
+        })
+    }   
+    
+    
+
+
+    
+    const BindTabla = async (Seccion) =>{
+            try {
+                document.getElementById('datos-tabla'+Seccion).innerHTML = ''
+                let response = await axios.post('http://localhost:3000/getAlertas',{Seccion})
+                TraerAlarmas(response.data,Seccion)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+     ///TraerAlarmas////// 
+    const TraerAlarmas = (data,Seccion) => {
+
+        let SeccionCarriers = `` 
+
+        
+        document.getElementById('datos-tabla'+Seccion).innerHTML = ''
+        data.map(record=>{
+            
+        if (Seccion == 1)
+        {
+            SeccionCarriers = `<td>${record.Carriers}</td>`
+        }    
+        document.getElementById('datos-tabla'+Seccion).innerHTML += `
+            <tr>
+                <td style="display:none">${record.IdAlerta}</td>
+                <td style="display:none">${record.Seccion}</td>
+                <td>${record.Nivel}</td>
+                <td>${record.ViaEnvio == 1 ? 'EMAIL' : record.ViaEnvio == 2 ? 'SMS' : record.ViaEnvio == 3 ? 'BLASTER' : ''}</td>
+                <td>${record.PError}</td>
+                <td>${record.PeriodoT}</td>`              
+                 + SeccionCarriers +
+                `<td><button type="button" id="btnEditar${Seccion}" onclick="EditarAlarma(${record.IdAlerta},${Seccion})"   class="btn btn-w-m btn-success">Editar</button></td>
+                <td><button type="button" id="btnBorrar${Seccion}" onclick="DelAlarm(${record.IdAlerta})"       class="btn btn-w-m btn-danger" >Borrar</button></td>
+            </tr>
+            `
+        })
+
+    }
+    /////
+
+    if(window.location.pathname === '/Alarmmanager'){
+        
+
+        $('.nav-tabs a').on('shown.bs.tab', function (event) {
+            var Tab = event.target.getAttribute("href")
+            var Seccion = Tab.substring(Tab.length,Tab.length - 1)
+            
+            BindTabla(Seccion)
+
+            if (Seccion == 2) //Proveedores
+            {
+               TraerProveedoresInterno()               
+            }
+            else(Seccion == 3)
+            {
+                TraerClientes()
+            }
+
+
+        });
+        
+       var Seccion = 1
+             
+       
+        BindTabla(Seccion)
+           
+    }
+
+function ValidarEmail(texto)
+{
+var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+//var regex = new RegExp('^' + mailformat );
+
+if(texto.match(mailformat))
+{
+//alert("Valid email address!");
+return true;
+}
+else
+{
+//alert("You have entered an invalid email address!");
+return false;
+}
+}
+
+function ReiniciarControles()
+{
+    var Tab = $('li.active a')[0].getAttribute("href")
+    var Seccion = Tab.substring(Tab.length,Tab.length - 1)
+    
+    $('#IdAlerta'+Seccion).val(0)
+    $('#Seccion'+Seccion).val(Seccion)
+    $('#Nivel'+Seccion).val(1)
+    $('#ViaEnvio'+Seccion).val(1)
+    $('#Mensaje'+Seccion).summernote({height: 155,
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['height', ['height']]
+                ]
+                });
+    $('#Mensaje'+Seccion).summernote('code', '')
+
+    $("#Destinatarios"+Seccion).tagsinput('removeAll'); 
+    $("#Carriers"+Seccion).val('').trigger("chosen:updated");
+
+    if (Seccion == 2)
+    {
+        
+        $("#ProveedoresInterno2").val('').trigger("chosen:updated");
+
+        $('#Proveedores2')[0].options.length = 0;
+        $("#Proveedores2").val('').trigger("chosen:updated");
+        $("#Proveedores2").innerHTML = ''
+
+        $('#Etiquetas2')[0].options.length = 0;
+        $("#Etiquetas2").val('').trigger("chosen:updated");
+        $("#Etiquetas2").innerHTML = ''
+
+    }
+
+
+        
+
+
+}
+
+
+
+
+
+
+</script>
