@@ -436,7 +436,7 @@ app.get('*', (req, res) => {
 
 // Server Listen
 ;(async () => {
-	pool = new sql.ConnectionPool(db.prod)
+	pool = new sql.ConnectionPool(db.qa)
 	await pool.connect()
 	app.listen(port, function () {
 		console.log(`Server is running on port ${port}`)
