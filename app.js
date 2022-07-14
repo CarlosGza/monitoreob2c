@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const favicon = require('serve-favicon')
 const sql = require('mssql')
 const db = require('./db/config.json')
+const cors = require('cors')
 let pool
 
 // json data
@@ -27,6 +28,8 @@ app.use(
 		extended: true,
 	})
 )
+
+app.use(cors({origin: '*'}))
 
 // Route to post data
 app.post('/', function (req, res) {
@@ -436,7 +439,7 @@ app.get('*', (req, res) => {
 
 // Server Listen
 ;(async () => {
-	pool = new sql.ConnectionPool(db.prod)
+	pool = new sql.ConnectionPool(db.dev)
 	await pool.connect()
 	app.listen(port, function () {
 		console.log(`Server is running on port ${port}`)
