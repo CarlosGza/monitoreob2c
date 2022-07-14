@@ -601,7 +601,7 @@ var texto = ""
 
     const TraerClientes = async () =>{
             try {
-                let response = await axios.post('http://localhost:3000/getClientes')
+                let response = await axios.post('http://localhost:5050/getClientes')
                 if ($("#ClientesVIP3").val().length == 0)
                 {
                BindSelect('ClientesVIP3',response.data)  
@@ -616,7 +616,7 @@ var texto = ""
 
     const TraerEtiquetas = async (Prov, Etiquetas) =>{
             try {
-                var response = await axios.post('http://localhost:3000/getEtiquetas',{Prov})
+                var response = await axios.post('http://localhost:5050/getEtiquetas',{Prov})
                 
             }
             finally{
@@ -649,7 +649,7 @@ var texto = ""
        
     const TraerProveedores = async (CompaniasProv, Proveedores,Etiquetas) =>{
             try {
-                var response = await axios.post('http://localhost:3000/getProveedores',{CompaniasProv})
+                var response = await axios.post('http://localhost:5050/getProveedores',{CompaniasProv})
                 // if ($("#Proveedores2").val().length == 0)
                 // {
                 //   BindSelect('Proveedores2',response.data)
@@ -681,7 +681,7 @@ var texto = ""
 
     const TraerProveedoresInterno = async () =>{
             try {
-                let response = await axios.post('http://localhost:3000/getProveedoresInterno')
+                let response = await axios.post('http://localhost:5050/getProveedoresInterno')
                 if ($("#ProveedoresInterno2").val().length == 0)
                 {
                BindSelect('ProveedoresInterno2',response.data)  
@@ -716,7 +716,7 @@ var texto = ""
 
     const EliminarRegistro = async (IdAlerta) =>{
             try {
-                let response = await axios.post('http://localhost:3000/DelAlarm',{IdAlerta})
+                let response = await axios.post('http://localhost:5050/DelAlarm',{IdAlerta})
                 
                 var Tab = $('li.active a')[0].getAttribute("href")
                 var Seccion = Tab.substring(Tab.length,Tab.length - 1)
@@ -732,7 +732,7 @@ var texto = ""
 
     const ActualizarAlarma = async (Id,Seccion,Nivel,ViaEnvio,PError,PTiempo,Carriers,Mensaje,Destinatarios,CompaniasProv,Prov,Etiquetas,ClientesVIP) => {
             try {
-                let response = await axios.post('http://localhost:3000/updAlarm',{IdAlerta: Id, Seccion: Seccion, Nivel: Nivel,ViaEnvio: ViaEnvio,PError: PError,PTiempo: PTiempo,Carriers: Carriers,Mensaje: Mensaje,Destinatarios: Destinatarios, CompaniasProv: CompaniasProv, Prov: Prov, Etiquetas: Etiquetas, ClientesVIP: ClientesVIP })
+                let response = await axios.post('http://localhost:5050/updAlarm',{IdAlerta: Id, Seccion: Seccion, Nivel: Nivel,ViaEnvio: ViaEnvio,PError: PError,PTiempo: PTiempo,Carriers: Carriers,Mensaje: Mensaje,Destinatarios: Destinatarios, CompaniasProv: CompaniasProv, Prov: Prov, Etiquetas: Etiquetas, ClientesVIP: ClientesVIP })
             
                 if(response.data[0].Resultado == '0')
                 {
@@ -866,7 +866,7 @@ function ajusteSQL(Opciones)
 
     const BindEditar = async (IdAlerta,Seccion) =>{
             try {
-                let response = await axios.post('http://localhost:3000/getAlertasbyid',{IdAlerta})
+                let response = await axios.post('http://localhost:5050/getAlertasbyid',{IdAlerta})
                 TraerAlarmasbyId(response.data, Seccion)
 
                 $('#myModal'+Seccion).modal({backdrop: 'static'},'Editar'
@@ -979,7 +979,7 @@ function ajusteSQL(Opciones)
     const BindTabla = async (Seccion) =>{
             try {
                 document.getElementById('datos-tabla'+Seccion).innerHTML = ''
-                let response = await axios.post('http://localhost:3000/getAlertas',{Seccion})
+                let response = await axios.post('http://localhost:5050/getAlertas',{Seccion})
                 TraerAlarmas(response.data,Seccion)
             } catch (err) {
                 console.log(err)

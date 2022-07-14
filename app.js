@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5050
 const bodyParser = require('body-parser')
 const favicon = require('serve-favicon')
 const sql = require('mssql')
@@ -28,6 +28,7 @@ app.use(
 		extended: true,
 	})
 )
+app.use(cors({origin: '*'}))
 
 app.use(cors({origin: '*'}))
 
@@ -137,6 +138,30 @@ app.post('/updRevisadoBlaster',async function(req,res) {
 		else
 			begin
 				update Blaster.dbo.revisionalertas set Revisado = ${revisado},Fecha = GETDATE() where IdEnvioPr = ${idenviopr}
+			end
+		`)
+		// console.log(results)
+		res.send(results)
+	} catch (err) {
+		// console.log(err)
+		res.send([])
+	}
+})
+
+// Route /updRevisadoMigrador
+app.post('/updRevisadoMigrador',async function(req,res) {
+	let idenviopr = req.body.idenviopr
+	let revisado = req.body.revisado ? 1 : 0
+	if(isNaN(idenviopr)) return res.send([])
+	try {
+		let results = await pool.request().query(`
+		if not exists (select top 1 1 from SMSCargas.dbo.revisionalertas with(nolock) where idenviopr=${idenviopr})
+			begin
+				insert into SMSCargas.dbo.revisionalertas select ${idenviopr},${revisado},GETDATE()
+			end
+		else
+			begin
+				update SMSCargas.dbo.revisionalertas set Revisado = ${revisado},Fecha = GETDATE() where IdEnvioPr = ${idenviopr}
 			end
 		`)
 		// console.log(results)
