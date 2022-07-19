@@ -177,7 +177,7 @@
             try {
                 document.getElementById('tracking_data').innerHTML = ''
                 document.getElementById('loader').style.display = 'flex'
-                let response = await axios.post('http://localhost:5050/getTracking',{telefono})
+                let response = await axios.post('http://mtelservice1:5050/getTracking',{telefono})
                 refreshTracking(response.data)
                 document.getElementById('loader').style.display = 'none'
             } catch (err) {
@@ -196,7 +196,7 @@
     
     const actualizaRevisadoBlaster = async (event) => {
         try {
-            let response = await axios.post('http://localhost:5050/updRevisadoBlaster',{idenviopr: event.target.value, revisado: event.target.checked})
+            let response = await axios.post('http://mtelservice1:5050/updRevisadoBlaster',{idenviopr: event.target.value, revisado: event.target.checked})
         } catch (err) {
             console.log(err)
         }
@@ -204,7 +204,7 @@
 
     const actualizaRevisadoMigradorSMS = async (event) => {
         try {
-            let response = await axios.post('http://localhost:5050/updRevisadoMigrador',{idenviopr: event.target.value, revisado: event.target.checked})
+            let response = await axios.post('http://mtelservice1:5050/updRevisadoMigrador',{idenviopr: event.target.value, revisado: event.target.checked})
         } catch (err) {
             console.log(err)
         }
