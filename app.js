@@ -44,12 +44,16 @@ app.use(
 )
 app.use(cors({origin: '*'}))
 
+<<<<<<< HEAD
+app.use(cors({origin: '*'}))
+=======
 //middleware para Datos
 const sourceData = (req, res, next) => {
 	if(req.method == 'GET') req.body.Datos = Datos
   next()
 }
 app.use(sourceData)
+>>>>>>> 330b3b859820541299c307b8260f10383e2fd30b
 
 // Route to post data
 app.post('/', function (req, res) {
