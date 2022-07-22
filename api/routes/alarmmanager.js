@@ -11,7 +11,7 @@ router.get('/Alarmmanager', function (req, res) {
 	
 	try {
 
-		res.render('alarmmanager')
+		res.render('alarmmanager', req.body.Datos)
 
 	} catch (err) {
 		res.render('empty')
