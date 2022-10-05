@@ -7,7 +7,7 @@ let pool
 })()
 
 router.get('/Tracking', function (req, res) {
-	if (!req.body.Datos.MensajesPrueba) return res.render('empty')
+	//if (!req.body.Datos.MensajesPrueba) return res.render('empty')
 	try {
 		res.render('tracking', req.body.Datos)
 	} catch (err) {

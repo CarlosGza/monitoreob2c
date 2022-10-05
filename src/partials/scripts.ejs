@@ -54,6 +54,10 @@
         ordering: false,
         pageLength: 10
     });
+    $('#GridBoletines').DataTable({
+        ordering: false,
+        pageLength: 10
+    });
     let audio = document.getElementById('alertAudio')
     const changeFavicon = () => {
         let favicon = document.querySelector('link[rel="icon"]')
@@ -90,6 +94,8 @@
         menuUsuarios.style.backgroundColor = '#FF6347'
     }
     const checkAlerts =  () => {
+        
+        
         let MensajesPrueba = <%- JSON.stringify(MensajesPrueba) %>
         let horaultimoenvio = MensajesPrueba.length > 0 ? MensajesPrueba[0].HoraMonitor : ''
         let ultimoenviodelay = MensajesPrueba.filter(el =>{ return el.HoraMonitor == horaultimoenvio && el.Diff_Segundos > 89})
@@ -97,6 +103,7 @@
             changeFavicon()
             alertMensajesPrueba()
         }
+        
 
         let Usuarios = <%- JSON.stringify(Usuarios) %>
         let errorUsuarios = Usuarios.filter(el =>{ return el.Problema !== ''})
@@ -176,7 +183,7 @@
             try {
                 document.getElementById('tracking_data').innerHTML = ''
                 document.getElementById('loader').style.display = 'flex'
-                let response = await axios.post(`${`<%= Endpoint %>`}/getTracking`,{telefono})
+                let response = await axios.post(`/getTracking`,{telefono})
                 refreshTracking(response.data)
                 document.getElementById('loader').style.display = 'none'
             } catch (err) {
@@ -195,7 +202,7 @@
     
     const actualizaRevisadoBlaster = async (event) => {
         try {
-            let response = await axios.post(`${`<%= Endpoint %>`}/updRevisadoBlaster`,{idenviopr: event.target.value, revisado: event.target.checked})
+            let response = await axios.post(`/updRevisadoBlaster`,{idenviopr: event.target.value, revisado: event.target.checked})
         } catch (err) {
             console.log(err)
         }
@@ -203,7 +210,7 @@
 
     const actualizaRevisadoMigradorSMS = async (event) => {
         try {
-            let response = await axios.post(`${`<%= Endpoint %>`}/updRevisadoMigrador`,{idenviopr: event.target.value, revisado: event.target.checked})
+            let response = await axios.post(`/updRevisadoMigrador`,{idenviopr: event.target.value, revisado: event.target.checked})
         } catch (err) {
             console.log(err)
         }
